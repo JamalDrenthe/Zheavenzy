@@ -12,6 +12,12 @@ import Lidmaatschap from './pages/Lidmaatschap'
 import Netwerk from './pages/Netwerk'
 import Over from './pages/Over'
 import Contact from './pages/Contact'
+import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
+import Leden from './pages/Leden'
+import Lid from './pages/Lid'
+import Berichten from './pages/Berichten'
+import Credits from './pages/Credits'
 
 function App() {
   return (
@@ -31,6 +37,12 @@ function App() {
         <Route path="/netwerk" element={<Netwerk />} />
         <Route path="/over" element={<Over />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/leden" element={<Leden />} />
+        <Route path="/leden/:id" element={<Lid />} />
+        <Route path="/berichten" element={<Berichten />} />
+        <Route path="/credits" element={<Credits />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

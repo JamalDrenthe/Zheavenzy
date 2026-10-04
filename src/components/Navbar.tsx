@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X, ChevronDown, LogIn, LayoutDashboard } from 'lucide-react'
+import { usePlatform } from '../lib/usePlatform'
 
 type NavItem = {
   label: string
@@ -47,6 +48,7 @@ export default function Navbar() {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null)
   const location = useLocation()
   const navRef = useRef<HTMLElement>(null)
+  const { user } = usePlatform()
 
   const [prevPath, setPrevPath] = useState(location.pathname)
   if (prevPath !== location.pathname) {
@@ -138,6 +140,13 @@ export default function Navbar() {
               </Link>
             )
           )}
+          <Link
+            to={user ? '/dashboard' : '/login'}
+            className="flex items-center gap-1.5 text-sm font-medium tracking-wide uppercase text-white/70 hover:text-white transition-colors"
+          >
+            {user ? <LayoutDashboard className="w-4 h-4 text-[#D4AF37]" /> : <LogIn className="w-4 h-4 text-[#D4AF37]" />}
+            {user ? 'Dashboard' : 'Inloggen'}
+          </Link>
           <Link to="/lidmaatschap" className="btn-gold text-sm glow-gold">
             Word Lid
           </Link>
@@ -206,6 +215,13 @@ export default function Navbar() {
                 </Link>
               )
             )}
+            <Link
+              to={user ? '/dashboard' : '/login'}
+              className="py-4 text-lg font-medium uppercase tracking-wide border-b border-white/10 text-white/80 flex items-center gap-2"
+            >
+              {user ? <LayoutDashboard className="w-5 h-5 text-[#D4AF37]" /> : <LogIn className="w-5 h-5 text-[#D4AF37]" />}
+              {user ? 'Dashboard' : 'Inloggen'}
+            </Link>
             <Link to="/lidmaatschap" className="btn-gold mt-6 text-center">
               Word Lid
             </Link>

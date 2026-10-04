@@ -125,6 +125,7 @@ export default function Contact() {
                         className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37]/50 transition-colors appearance-none cursor-pointer"
                       >
                         <option value="artiest">Artiest / Muzikant</option>
+                        <option value="auditie">Artiest — auditie boeken (getekend)</option>
                         <option value="boeker">Boeker / Event Organizer</option>
                         <option value="producer">Producer / Creative</option>
                         <option value="andere">Andere</option>
@@ -194,6 +195,13 @@ export default function Contact() {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="reveal reveal-delay-2 glass-card rounded-2xl p-6 border-[#D4AF37]/20">
+                <h4 className="text-white font-bold mb-2 text-sm">Auditie boeken</h4>
+                <p className="text-white/40 text-xs leading-relaxed">
+                  Wil je getekend worden bij Zheavenzy? Een auditie kost €500. Kies "Auditie boeken" in het formulier en vertel ons wie je bent — we plannen dan een auditiegesprek.
+                </p>
               </div>
 
               <div className="reveal reveal-delay-2 glass-card rounded-2xl p-6">

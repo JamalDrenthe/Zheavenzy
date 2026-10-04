@@ -9,6 +9,9 @@ import {
   ArrowRight,
   CheckCircle2,
   X,
+  Mic,
+  FileAudio,
+  Handshake,
 } from 'lucide-react'
 import PageHero, { CtaSection, SectionIntro } from '../components/PageHero'
 
@@ -39,7 +42,7 @@ const routes = [
       'Langetermijn carrière-opbouw',
       'Op basis van wederzijdse selectie',
     ],
-    cta: 'Dien je Audition In',
+    cta: 'Boek een Auditie',
     href: '/contact',
     highlight: false,
   },
@@ -209,6 +212,49 @@ export default function Platform() {
         </div>
       </section>
 
+      {/* Auditie boeken */}
+      <section className="py-24 md:py-32 bg-[#050505]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <SectionIntro
+            eyebrow="Getekend worden"
+            title={
+              <>
+                Boek een <span className="text-gradient-gold">auditie.</span>
+              </>
+            }
+            description="Getekend worden bij Zheavenzy begint met een auditie. Een auditie kost €500 — laat ons horen wie je bent, in drie stappen."
+            center
+          />
+          <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {[
+              { icon: FileAudio, step: 'Stap 1', title: 'Boek je auditie', desc: 'Vraag een auditie aan via het contactformulier (€500) en stuur je beste tracks mee.' },
+              { icon: Mic, step: 'Stap 2', title: 'Laat je horen', desc: 'Wij luisteren naar je muziek en kijken naar je drive, stijl en potentieel.' },
+              { icon: Handshake, step: 'Stap 3', title: 'Wederzijds gesprek', desc: 'Is het een match aan beide kanten? Dan bespreken we een getekende samenwerking.' },
+            ].map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                className="glass-card rounded-2xl p-8 text-center"
+              >
+                <div className="text-[#D4AF37] text-[10px] font-bold uppercase tracking-[0.2em] mb-4">{item.step}</div>
+                <item.icon className="w-7 h-7 text-[#D4AF37] mx-auto mb-4" />
+                <h3 className="text-white font-bold mb-2">{item.title}</h3>
+                <p className="text-white/40 text-xs leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+          <div className="text-center mt-12 reveal">
+            <Link to="/contact" className="btn-gold glow-gold inline-flex items-center gap-2 px-8 py-4">
+              Boek een Auditie — €500
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Platform tools */}
       <section className="py-24 bg-[#0a0a0a] border-y border-white/5">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -255,7 +301,7 @@ export default function Platform() {
         primaryHref="/lidmaatschap"
         primaryLabel="Word Lid"
         secondaryHref="/contact"
-        secondaryLabel="Dien Audition In"
+        secondaryLabel="Boek een Auditie"
       />
     </>
   )
