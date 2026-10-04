@@ -277,7 +277,7 @@ export default function Netwerk() {
               Aanmelden
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link to="/artiesten" className="btn-outline flex items-center justify-center gap-2">
+            <Link to="/diensten/artiesten" className="btn-outline flex items-center justify-center gap-2">
               Bekijk Diensten
             </Link>
           </div>

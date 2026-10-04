@@ -219,7 +219,7 @@ export default function Home() {
                 variants={fadeUp}
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <Link to="/artiesten" className="btn-gold flex items-center justify-center gap-2 glow-gold">
+                <Link to="/diensten/artiesten" className="btn-gold flex items-center justify-center gap-2 glow-gold">
                   Start als Artiest
                   <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -523,7 +523,7 @@ export default function Home() {
                 ))}
               </ul>
               <Link
-                to="/contact"
+                to="/platform"
                 className="block w-full py-3.5 text-center rounded-xl bg-[#1a1a1a] text-white border border-[#D4AF37]/20 hover:bg-[#D4AF37] hover:text-[#050505] font-semibold transition-all text-sm"
               >
                 Ontdek het Puntenprogramma
@@ -535,17 +535,17 @@ export default function Home() {
               <div className="absolute top-0 right-0 bg-[#D4AF37] text-[#050505] text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">
                 Populair
               </div>
-              <h3 className="text-2xl font-bold mb-3 text-gradient-gold">Subscription Deals</h3>
+              <h3 className="text-2xl font-bold mb-3 text-gradient-gold">Zheavenzy Lidmaatschappen</h3>
               <p className="text-white/50 mb-8 leading-relaxed">
-                Nog niet klaar om iets terug te leveren aan de community, of liever alles afkopen? 
-                Kies dan voor een van onze overzichtelijke, vaste maandelijkse abonnementen 
-                voor volledige toegang.
+                Met een Zheavenzy-lidmaatschap krijg je meteen toegang tot het complete platform:
+                alle tools, releases op alle streaming platforms en het netwerk. Geen label
+                nodig — je hoeft niet getekend te zijn.
               </p>
               <ul className="space-y-4 mb-8">
                 {[
-                  'Vast bedrag, geen verrassingen',
-                  'Direct gebruik maken van diensten',
-                  'Focus 100% op je eigen muziek',
+                  'Drie tiers: Start, Groei en Pro',
+                  'Releases op alle platforms inbegrepen',
+                  'Maandelijks opzegbaar, geen percentages',
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-white/60 text-sm">
                     <CheckCircle2 className="w-4 h-4 text-[#D4AF37] flex-shrink-0" />
@@ -554,10 +554,10 @@ export default function Home() {
                 ))}
               </ul>
               <Link
-                to="/contact"
+                to="/lidmaatschap"
                 className="block w-full py-3.5 text-center rounded-xl bg-[#D4AF37] text-[#050505] font-bold hover:bg-[#F4D068] glow-gold transition-all text-sm"
               >
-                Bekijk Abonnementen
+                Bekijk Lidmaatschappen
               </Link>
             </div>
           </div>
@@ -580,7 +580,7 @@ export default function Home() {
             eerlijke deals en een toegewijd team dat meedenkt.
           </p>
           <div className="reveal reveal-delay-2 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact" className="btn-gold glow-gold flex items-center justify-center gap-2">
+            <Link to="/lidmaatschap" className="btn-gold glow-gold flex items-center justify-center gap-2">
               Word Lid
               <ArrowRight className="w-4 h-4" />
             </Link>
