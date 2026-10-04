@@ -155,15 +155,6 @@ export default function Lidmaatschap() {
                   }`}
                 >
                   {p.label}
-                  {(p.mostChosen || p.benefit || p.discount) && (
-                    <span
-                      className={`absolute -top-3 left-1/2 -translate-x-1/2 text-[9px] font-bold uppercase tracking-wider whitespace-nowrap ${
-                        period === p.key ? 'text-[#D4AF37]' : 'text-[#D4AF37]/70'
-                      }`}
-                    >
-                      {p.mostChosen ? 'Meest gekozen' : (p.benefit ?? p.discount)}
-                    </span>
-                  )}
                 </button>
               ))}
             </div>
