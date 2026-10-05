@@ -18,6 +18,8 @@ import Leden from './pages/Leden'
 import Lid from './pages/Lid'
 import Berichten from './pages/Berichten'
 import Credits from './pages/Credits'
+import Instellingen from './pages/Instellingen'
+import Notificaties from './pages/Notificaties'
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
         <Route path="/leden/:id" element={<Lid />} />
         <Route path="/berichten" element={<Berichten />} />
         <Route path="/credits" element={<Credits />} />
+        <Route path="/instellingen" element={<Instellingen />} />
+        <Route path="/notificaties" element={<Notificaties />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

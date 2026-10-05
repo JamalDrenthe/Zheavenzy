@@ -5,6 +5,15 @@ export interface User {
   name: string
   email: string
   tier: Tier
+  bio: string
+  avatar: string | null
+}
+
+export interface AppNotification {
+  id: number
+  text: string
+  ts: number
+  read: boolean
 }
 
 export interface StoredState {
@@ -13,6 +22,10 @@ export interface StoredState {
   messages: Record<string, Message[]>
   bookings: Booking[]
   uploads: Upload[]
+  following: string[]
+  friends: string[]
+  pendingFriends: string[]
+  notifications: AppNotification[]
 }
 
 export interface PlatformState extends StoredState {
@@ -22,6 +35,10 @@ export interface PlatformState extends StoredState {
   uploadWork: (title: string, type: string) => void
   sendMessage: (memberId: string, text: string) => void
   requestBooking: (memberId: string, date: string) => void
+  toggleFollow: (memberId: string) => void
+  requestFriend: (memberId: string) => void
+  updateProfile: (fields: { name?: string; email?: string; bio?: string; avatar?: string | null }) => void
+  markNotificationsRead: () => void
   tierLabel: (t: Tier) => string
 }
 

@@ -13,6 +13,8 @@ export interface Member {
   costPerDay: number
   directBook: boolean
   available: number[] // dag-offsets vanaf vandaag
+  followers: number
+  collabs: number
 }
 
 export interface Message {
@@ -47,6 +49,8 @@ export const members: Member[] = [
     costPerDay: 850,
     directBook: true,
     available: [1, 2, 4, 5, 8, 9, 11, 12],
+    followers: 2100,
+    collabs: 34,
   },
   {
     id: 'm-kai',
@@ -60,6 +64,8 @@ export const members: Member[] = [
     costPerDay: 700,
     directBook: false,
     available: [0, 3, 4, 7, 10, 13],
+    followers: 1400,
+    collabs: 21,
   },
   {
     id: 'm-mara',
@@ -73,6 +79,8 @@ export const members: Member[] = [
     costPerDay: 1200,
     directBook: true,
     available: [2, 3, 6, 7, 9, 12, 13],
+    followers: 3200,
+    collabs: 47,
   },
   {
     id: 'm-denzel',
@@ -86,6 +94,8 @@ export const members: Member[] = [
     costPerDay: 600,
     directBook: false,
     available: [1, 5, 6, 8, 11, 14],
+    followers: 890,
+    collabs: 15,
   },
   {
     id: 'm-sana',
@@ -99,6 +109,8 @@ export const members: Member[] = [
     costPerDay: 500,
     directBook: true,
     available: [0, 1, 4, 6, 8, 10, 12],
+    followers: 2600,
+    collabs: 38,
   },
   {
     id: 'm-robin',
@@ -112,6 +124,8 @@ export const members: Member[] = [
     costPerDay: 550,
     directBook: false,
     available: [2, 4, 5, 9, 10, 13],
+    followers: 1100,
+    collabs: 19,
   },
   {
     id: 'm-noor',
@@ -125,6 +139,8 @@ export const members: Member[] = [
     costPerDay: 750,
     directBook: true,
     available: [1, 3, 5, 7, 8, 11, 14],
+    followers: 2900,
+    collabs: 41,
   },
   {
     id: 'm-tom',
@@ -138,6 +154,8 @@ export const members: Member[] = [
     costPerDay: 650,
     directBook: false,
     available: [0, 2, 6, 9, 12, 13],
+    followers: 760,
+    collabs: 12,
   },
 ]
 

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Star, Coins, MessageSquare, CalendarCheck, CheckCircle2, ArrowLeft } from 'lucide-react'
+import { Star, Coins, MessageSquare, CalendarCheck, CheckCircle2, ArrowLeft, UserPlus, UserCheck, UserPlus2, Users } from 'lucide-react'
 import { usePlatform } from '../lib/usePlatform'
 import { members, roleLabel, dayLabel, dayISO } from '../lib/data'
 
@@ -9,7 +9,7 @@ const dayOffsets = Array.from({ length: 14 }, (_, i) => i)
 
 export default function Lid() {
   const { id } = useParams()
-  const { user, requestBooking, bookings } = usePlatform()
+  const { user, requestBooking, bookings, following, friends, pendingFriends, toggleFollow, requestFriend } = usePlatform()
   const [selected, setSelected] = useState<number | null>(null)
   const [done, setDone] = useState(false)
 
@@ -18,6 +18,10 @@ export default function Lid() {
   if (!member) return <Navigate to="/leden" replace />
 
   const myBookings = bookings.filter((b) => b.memberId === member.id)
+  const isFollowing = following.includes(member.id)
+  const isFriend = friends.includes(member.id)
+  const isPending = pendingFriends.includes(member.id)
+  const followerCount = member.followers + (isFollowing ? 1 : 0)
 
   const book = () => {
     if (selected === null) return
@@ -42,6 +46,31 @@ export default function Lid() {
               <div className="text-[#D4AF37]/70 text-[10px] font-bold uppercase tracking-[0.2em]">{roleLabel(member.role)}</div>
               <h1 className="text-4xl md:text-5xl font-extrabold tracking-tighter text-white mt-1">{member.name}</h1>
               <p className="text-white/50 mt-1">{member.tagline}</p>
+            </div>
+            <div className="flex flex-wrap gap-3 ml-auto">
+              <button
+                onClick={() => toggleFollow(member.id)}
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                  isFollowing ? 'bg-[#D4AF37] text-[#050505]' : 'btn-outline'
+                }`}
+              >
+                {isFollowing ? <UserCheck className="w-4 h-4" /> : <UserPlus className="w-4 h-4" />}
+                {isFollowing ? 'Volgend' : 'Volg'}
+              </button>
+              <button
+                onClick={() => requestFriend(member.id)}
+                disabled={isFriend || isPending}
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                  isFriend
+                    ? 'bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[#D4AF37] cursor-default'
+                    : isPending
+                      ? 'bg-white/5 border border-white/10 text-white/40 cursor-default'
+                      : 'btn-outline'
+                }`}
+              >
+                {isFriend ? <UserCheck className="w-4 h-4" /> : <UserPlus2 className="w-4 h-4" />}
+                {isFriend ? 'Vrienden' : isPending ? 'Verzoek verstuurd' : 'Vriendschapsverzoek'}
+              </button>
             </div>
           </div>
         </div>
@@ -75,6 +104,17 @@ export default function Lid() {
                 <div>
                   <div className="text-white/40 text-xs uppercase tracking-wider mb-1">Werken met {member.name.split(' ')[0]}</div>
                   <div className="text-white font-bold">{member.costPerDay} credits / dag</div>
+                </div>
+                <div>
+                  <div className="text-white/40 text-xs uppercase tracking-wider mb-1">Volgers</div>
+                  <div className="text-white font-bold">{followerCount.toLocaleString('nl-NL')}</div>
+                </div>
+                <div>
+                  <div className="text-white/40 text-xs uppercase tracking-wider mb-1">Samenwerkingen</div>
+                  <div className="flex items-center gap-1.5 text-white font-bold">
+                    <Users className="w-4 h-4 text-[#D4AF37]" />
+                    {member.collabs}
+                  </div>
                 </div>
               </div>
 

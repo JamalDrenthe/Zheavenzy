@@ -1,11 +1,11 @@
 import { Link, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Users, MessageSquare, Coins, UploadCloud, CalendarCheck, LogOut, ArrowRight } from 'lucide-react'
+import { Users, MessageSquare, Coins, UploadCloud, CalendarCheck, LogOut, ArrowRight, Settings, Bell, UserCheck, Heart } from 'lucide-react'
 import { usePlatform } from '../lib/usePlatform'
 import { members } from '../lib/data'
 
 export default function Dashboard() {
-  const { user, credits, bookings, uploads, messages, logout, tierLabel } = usePlatform()
+  const { user, credits, bookings, uploads, messages, logout, tierLabel, following, friends, notifications } = usePlatform()
 
   if (!user) return <Navigate to="/login" replace />
 
@@ -14,6 +14,8 @@ export default function Dashboard() {
     { icon: MessageSquare, title: 'Berichten', desc: `${Object.keys(messages).length} gesprek${Object.keys(messages).length === 1 ? '' : 'ken'} actief.`, href: '/berichten' },
     { icon: Coins, title: 'Credits', desc: 'Koop bundels of verdien credits met uploads.', href: '/credits' },
     { icon: UploadCloud, title: 'Kunst uploaden', desc: `Upload werk en verdien credits — ${uploads.length} upload${uploads.length === 1 ? '' : 's'} live.`, href: '/credits' },
+    { icon: Bell, title: 'Notificaties', desc: `${notifications.filter((n) => !n.read).length} ongelezen update${notifications.filter((n) => !n.read).length === 1 ? '' : 's'}.`, href: '/notificaties' },
+    { icon: Settings, title: 'Instellingen', desc: 'Accountgegevens, profielfoto en bio aanpassen.', href: '/instellingen' },
   ]
 
   return (
@@ -51,6 +53,18 @@ export default function Dashboard() {
             <div className="glass-card rounded-2xl p-6">
               <div className="text-white/40 text-xs uppercase tracking-wider mb-1">Uploads op het platform</div>
               <div className="text-3xl font-extrabold text-white">{uploads.length}</div>
+            </div>
+            <div className="glass-card rounded-2xl p-6">
+              <div className="text-white/40 text-xs uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                <Heart className="w-3.5 h-3.5 text-[#D4AF37]" /> Volgend
+              </div>
+              <div className="text-3xl font-extrabold text-white">{following.length}</div>
+            </div>
+            <div className="glass-card rounded-2xl p-6">
+              <div className="text-white/40 text-xs uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                <UserCheck className="w-3.5 h-3.5 text-[#D4AF37]" /> Vrienden
+              </div>
+              <div className="text-3xl font-extrabold text-white">{friends.length}</div>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, ChevronDown, LogIn, LayoutDashboard } from 'lucide-react'
+import { Menu, X, ChevronDown, LogIn, LogOut, LayoutDashboard, Bell } from 'lucide-react'
 import { usePlatform } from '../lib/usePlatform'
 
 type NavItem = {
@@ -48,7 +48,8 @@ export default function Navbar() {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null)
   const location = useLocation()
   const navRef = useRef<HTMLElement>(null)
-  const { user } = usePlatform()
+  const { user, logout, notifications } = usePlatform()
+  const unread = notifications.filter((n) => !n.read).length
 
   const [prevPath, setPrevPath] = useState(location.pathname)
   if (prevPath !== location.pathname) {
@@ -147,6 +148,30 @@ export default function Navbar() {
             {user ? <LayoutDashboard className="w-4 h-4 text-[#D4AF37]" /> : <LogIn className="w-4 h-4 text-[#D4AF37]" />}
             {user ? 'Dashboard' : 'Inloggen'}
           </Link>
+          {user && (
+            <Link
+              to="/notificaties"
+              className="relative flex items-center text-white/70 hover:text-white transition-colors"
+              aria-label="Notificaties"
+            >
+              <Bell className="w-4 h-4 text-[#D4AF37]" />
+              {unread > 0 && (
+                <span className="absolute -top-1.5 -right-2 bg-[#D4AF37] text-[#050505] text-[9px] font-bold rounded-full min-w-4 h-4 flex items-center justify-center px-1">
+                  {unread}
+                </span>
+              )}
+            </Link>
+          )}
+          {user && (
+            <button
+              type="button"
+              onClick={logout}
+              className="flex items-center gap-1.5 text-sm font-medium tracking-wide uppercase text-white/50 hover:text-white transition-colors"
+            >
+              <LogOut className="w-4 h-4 text-[#D4AF37]" />
+              Uitloggen
+            </button>
+          )}
           <Link to="/lidmaatschap" className="btn-gold text-sm glow-gold">
             Word Lid
           </Link>
@@ -222,6 +247,30 @@ export default function Navbar() {
               {user ? <LayoutDashboard className="w-5 h-5 text-[#D4AF37]" /> : <LogIn className="w-5 h-5 text-[#D4AF37]" />}
               {user ? 'Dashboard' : 'Inloggen'}
             </Link>
+            {user && (
+              <Link
+                to="/notificaties"
+                className="py-4 text-lg font-medium uppercase tracking-wide border-b border-white/10 text-white/80 flex items-center gap-2"
+              >
+                <Bell className="w-5 h-5 text-[#D4AF37]" />
+                Notificaties
+                {unread > 0 && (
+                  <span className="bg-[#D4AF37] text-[#050505] text-[10px] font-bold rounded-full min-w-5 h-5 flex items-center justify-center px-1.5">
+                    {unread}
+                  </span>
+                )}
+              </Link>
+            )}
+            {user && (
+              <button
+                type="button"
+                onClick={logout}
+                className="py-4 text-lg font-medium uppercase tracking-wide border-b border-white/10 text-white/80 flex items-center gap-2 text-left"
+              >
+                <LogOut className="w-5 h-5 text-[#D4AF37]" />
+                Uitloggen
+              </button>
+            )}
             <Link to="/lidmaatschap" className="btn-gold mt-6 text-center">
               Word Lid
             </Link>
