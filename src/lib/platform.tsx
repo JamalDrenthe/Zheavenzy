@@ -73,14 +73,32 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
           notify(`"${title}" geüpload — +${uploadReward} credits, nu onderdeel van het platform.`),
         ],
       })),
-    sendMessage: (memberId, text) =>
+    sendMessage: (memberId, text) => {
       setState((s) => ({
         ...s,
         messages: {
           ...s.messages,
-          [memberId]: [...(s.messages[memberId] ?? []), { from: 'me', text, ts: Date.now() }],
+          [memberId]: [...(s.messages[memberId] ?? []), { from: 'me' as const, text, ts: Date.now() }],
         },
-      })),
+      }))
+      const member = members.find((m) => m.id === memberId)
+      const replies = [
+        'Dank voor je bericht! Ik reageer zo snel mogelijk.',
+        'Top, laten we de details via de kalender afstemmen.',
+        'Klinkt goed — stuur me gerust meer info.',
+      ]
+      const reply = replies[Math.floor(Math.random() * replies.length)]
+      setTimeout(() => {
+        setState((cur) => ({
+          ...cur,
+          messages: {
+            ...cur.messages,
+            [memberId]: [...(cur.messages[memberId] ?? []), { from: 'them' as const, text: reply, ts: Date.now() }],
+          },
+          notifications: [...cur.notifications, notify(`Nieuw bericht van ${member?.name ?? 'een lid'}.`)],
+        }))
+      }, 1600)
+    },
     requestBooking: (memberId, date) =>
       setState((s) => {
         const member = members.find((m) => m.id === memberId)
