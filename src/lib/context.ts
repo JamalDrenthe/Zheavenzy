@@ -7,6 +7,9 @@ export interface User {
   tier: Tier
   bio: string
   avatar: string | null
+  isAdmin?: boolean
+  isDemo?: boolean
+  provider?: 'google' | 'demo'
 }
 
 export interface AppNotification {
@@ -29,7 +32,21 @@ export interface StoredState {
 }
 
 export interface PlatformState extends StoredState {
-  login: (tier: Tier, name: string, email: string) => void
+  login: (
+    tier: Tier,
+    name: string,
+    email: string,
+    options?: {
+      bio?: string
+      avatar?: string | null
+      isAdmin?: boolean
+      isDemo?: boolean
+      provider?: 'google' | 'demo'
+      credits?: number
+    }
+  ) => void
+  loginWithGoogle: () => Promise<{ success: boolean; error?: string; isAdmin?: boolean }>
+  loginDemo: (demoId: 'luna' | 'mara' | 'alex' | 'jamal') => void
   logout: () => void
   buyBundle: (credits: number) => void
   uploadWork: (title: string, type: string) => void

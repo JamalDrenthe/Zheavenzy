@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "zheavenzy-dev",
+    "dev": "zheavenzy-dev",
+    "prod": "zheavenzy-prod"
+  }
+}

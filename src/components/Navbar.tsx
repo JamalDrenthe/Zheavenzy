@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, ChevronDown, LogIn, LogOut, LayoutDashboard, Bell } from 'lucide-react'
+import { Menu, X, ChevronDown, LogIn, LogOut, LayoutDashboard, Bell, Crown } from 'lucide-react'
 import { usePlatform } from '../lib/usePlatform'
 
 type NavItem = {
@@ -143,10 +143,23 @@ export default function Navbar() {
           )}
           <Link
             to={user ? '/dashboard' : '/login'}
-            className="flex items-center gap-1.5 text-sm font-medium tracking-wide uppercase text-white/70 hover:text-white transition-colors"
+            className="flex items-center gap-2 text-sm font-medium tracking-wide uppercase text-white/70 hover:text-white transition-colors"
           >
-            {user ? <LayoutDashboard className="w-4 h-4 text-[#D4AF37]" /> : <LogIn className="w-4 h-4 text-[#D4AF37]" />}
-            {user ? 'Dashboard' : 'Inloggen'}
+            {user ? (
+              user.avatar ? (
+                <img src={user.avatar} alt={user.name} className="w-5 h-5 rounded-full object-cover border border-[#D4AF37]" />
+              ) : (
+                <LayoutDashboard className="w-4 h-4 text-[#D4AF37]" />
+              )
+            ) : (
+              <LogIn className="w-4 h-4 text-[#D4AF37]" />
+            )}
+            <span>{user ? 'Dashboard' : 'Inloggen'}</span>
+            {user?.isAdmin && (
+              <span className="px-1.5 py-0.5 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] text-[9px] font-bold tracking-wider uppercase flex items-center gap-0.5">
+                <Crown className="w-2.5 h-2.5" /> Admin
+              </span>
+            )}
           </Link>
           {user && (
             <Link
@@ -242,10 +255,25 @@ export default function Navbar() {
             )}
             <Link
               to={user ? '/dashboard' : '/login'}
-              className="py-4 text-lg font-medium uppercase tracking-wide border-b border-white/10 text-white/80 flex items-center gap-2"
+              className="py-4 text-lg font-medium uppercase tracking-wide border-b border-white/10 text-white/80 flex items-center justify-between"
             >
-              {user ? <LayoutDashboard className="w-5 h-5 text-[#D4AF37]" /> : <LogIn className="w-5 h-5 text-[#D4AF37]" />}
-              {user ? 'Dashboard' : 'Inloggen'}
+              <div className="flex items-center gap-2">
+                {user ? (
+                  user.avatar ? (
+                    <img src={user.avatar} alt={user.name} className="w-5 h-5 rounded-full object-cover border border-[#D4AF37]" />
+                  ) : (
+                    <LayoutDashboard className="w-5 h-5 text-[#D4AF37]" />
+                  )
+                ) : (
+                  <LogIn className="w-5 h-5 text-[#D4AF37]" />
+                )}
+                <span>{user ? 'Dashboard' : 'Inloggen'}</span>
+              </div>
+              {user?.isAdmin && (
+                <span className="px-2 py-0.5 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] text-[10px] font-bold tracking-wider uppercase flex items-center gap-1">
+                  <Crown className="w-3 h-3" /> Admin
+                </span>
+              )}
             </Link>
             {user && (
               <Link

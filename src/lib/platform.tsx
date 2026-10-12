@@ -1,11 +1,18 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { members, tierCredits, uploadReward, type Booking } from './data'
+import { members, tierCredits, uploadReward, type Booking, type Tier } from './data'
 import {
   PlatformContext,
   type PlatformState,
   type StoredState,
   type AppNotification,
 } from './context'
+import {
+  loginWithGoogleOAuth,
+  logoutFirebase,
+  auth,
+  onAuthStateChanged,
+  isAdminEmail,
+} from './firebase'
 
 const STORAGE_KEY = 'zheavenzy-platform'
 
@@ -48,21 +55,160 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
     read: false,
   })
 
+  // Synchroniseer Firebase auth status
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (fbUser) => {
+      if (fbUser && fbUser.email) {
+        const isAdmin = isAdminEmail(fbUser.email)
+        setState((s) => {
+          // Alleen bijwerken als niet al dezelfde gebruiker
+          if (s.user?.email === fbUser.email && s.user?.provider === 'google') {
+            return s
+          }
+          return {
+            ...s,
+            user: {
+              name: fbUser.displayName || (isAdmin ? 'Jamal Drenthe' : 'Google Gebruiker'),
+              email: fbUser.email || '',
+              tier: 'pro' as Tier,
+              bio: isAdmin ? 'Platform Eigenaar & Administrator' : s.user?.bio ?? '',
+              avatar: fbUser.photoURL || (s.user?.avatar ?? null),
+              isAdmin,
+              isDemo: false,
+              provider: 'google',
+            },
+            credits: s.credits > 0 ? s.credits : (isAdmin ? 25000 : tierCredits['pro']),
+          }
+        })
+      }
+    })
+
+    return () => unsubscribe()
+  }, [])
+
   const value: PlatformState = {
     ...state,
-    login: (tier, name, email) =>
+    login: (tier, name, email, options) => {
+      const isEmailAdmin = isAdminEmail(email)
+      const isAdmin = options?.isAdmin !== undefined ? options.isAdmin : isEmailAdmin
+      const isDemo = options?.isDemo ?? false
+      const provider = options?.provider ?? (isDemo ? 'demo' : 'google')
+      const initialCredits = options?.credits ?? (state.credits || tierCredits[tier] || 1000)
+
       setState((s) => ({
         ...s,
-        user: { tier, name, email, bio: s.user?.bio ?? '', avatar: s.user?.avatar ?? null },
-        credits: s.credits || tierCredits[tier],
-      })),
-    logout: () => setState((s) => ({ ...s, user: null })),
+        user: {
+          tier,
+          name: name || (isAdmin ? 'Jamal Drenthe' : 'Gebruiker'),
+          email: email || (isAdmin ? 'info@jamaldrenthe.com' : 'demo@zheavenzy.one'),
+          bio: options?.bio ?? (isAdmin ? 'Platform Eigenaar & Administrator' : s.user?.bio ?? ''),
+          avatar: options?.avatar ?? s.user?.avatar ?? null,
+          isAdmin,
+          isDemo,
+          provider,
+        },
+        credits: isAdmin ? Math.max(initialCredits, 25000) : initialCredits,
+        notifications: [
+          ...s.notifications,
+          notify(
+            isAdmin
+              ? '👑 Ingelogd als Administrator met volledige beheerrechten.'
+              : `Ingelogd op je ${tier.toUpperCase()} account.`
+          ),
+        ],
+      }))
+    },
+
+    loginWithGoogle: async () => {
+      const res = await loginWithGoogleOAuth()
+      if (res.success && res.user) {
+        const email = res.user.email || ''
+        const isAdmin = isAdminEmail(email)
+        const name = res.user.displayName || (isAdmin ? 'Jamal Drenthe' : 'Google Gebruiker')
+        const avatar = res.user.photoURL || null
+
+        setState((s) => ({
+          ...s,
+          user: {
+            name,
+            email,
+            tier: 'pro' as Tier,
+            bio: isAdmin ? 'Platform Eigenaar & Administrator' : 'Zheavenzy Muziek Professional',
+            avatar,
+            isAdmin,
+            isDemo: false,
+            provider: 'google',
+          },
+          credits: isAdmin ? Math.max(s.credits, 25000) : (s.credits || tierCredits['pro']),
+          notifications: [
+            ...s.notifications,
+            notify(
+              isAdmin
+                ? '👑 Welkom Jamal! Ingelogd via Google OAuth als Administrator.'
+                : `Welkom ${name}! Ingelogd via Google OAuth.`
+            ),
+          ],
+        }))
+
+        return { success: true, isAdmin }
+      }
+
+      return { success: false, error: res.error }
+    },
+
+    loginDemo: (demoId) => {
+      if (demoId === 'luna') {
+        value.login('pro', 'Luna Voss (Demo)', 'luna.voss@zheavenzy.demo', {
+          bio: "R&B / Soul zangeres & songwriter. Drie EP's uitgebracht via Zheavenzy.",
+          avatar: null,
+          isAdmin: false,
+          isDemo: true,
+          provider: 'demo',
+          credits: 12400,
+        })
+      } else if (demoId === 'mara') {
+        value.login('groei', 'Mara Chen (Demo)', 'mara.chen@zheavenzy.demo', {
+          bio: "Videograaf & visual director voor artiesten en clips.",
+          avatar: null,
+          isAdmin: false,
+          isDemo: true,
+          provider: 'demo',
+          credits: 4500,
+        })
+      } else if (demoId === 'alex') {
+        value.login('start', 'Alex Rivers (Demo)', 'alex.rivers@zheavenzy.demo', {
+          bio: "Beginnend artiest op zoek naar producers en studiosessies.",
+          avatar: null,
+          isAdmin: false,
+          isDemo: true,
+          provider: 'demo',
+          credits: 1000,
+        })
+      } else if (demoId === 'jamal') {
+        // Simulatie van Jamal admin account
+        value.login('pro', 'Jamal Drenthe (Admin Demo)', 'info@jamaldrenthe.com', {
+          bio: 'Platform Eigenaar & Administrator',
+          avatar: null,
+          isAdmin: true,
+          isDemo: true,
+          provider: 'demo',
+          credits: 50000,
+        })
+      }
+    },
+
+    logout: () => {
+      logoutFirebase()
+      setState((s) => ({ ...s, user: null }))
+    },
+
     buyBundle: (c) =>
       setState((s) => ({
         ...s,
         credits: s.credits + c,
         notifications: [...s.notifications, notify(`${c.toLocaleString('nl-NL')} credits toegevoegd aan je saldo.`)],
       })),
+
     uploadWork: (title, type) =>
       setState((s) => ({
         ...s,
@@ -73,6 +219,7 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
           notify(`"${title}" geüpload — +${uploadReward} credits, nu onderdeel van het platform.`),
         ],
       })),
+
     sendMessage: (memberId, text) => {
       setState((s) => ({
         ...s,
@@ -99,6 +246,7 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         }))
       }, 1600)
     },
+
     requestBooking: (memberId, date) =>
       setState((s) => {
         const member = members.find((m) => m.id === memberId)
@@ -123,6 +271,7 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
           ],
         }
       }),
+
     toggleFollow: (memberId) =>
       setState((s) => {
         const isFollowing = s.following.includes(memberId)
@@ -137,6 +286,7 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
             : [...s.notifications, notify(`Je volgt nu ${member?.name ?? 'dit lid'}.`)],
         }
       }),
+
     requestFriend: (memberId) =>
       setState((s) => {
         if (s.friends.includes(memberId) || s.pendingFriends.includes(memberId)) return s
@@ -166,6 +316,7 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
           ],
         }
       }),
+
     updateProfile: (fields) =>
       setState((s) =>
         s.user
@@ -176,11 +327,13 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
             }
           : s,
       ),
+
     markNotificationsRead: () =>
       setState((s) => ({
         ...s,
         notifications: s.notifications.map((n) => ({ ...n, read: true })),
       })),
+
     tierLabel: (t) => (t === 'start' ? 'Start' : t === 'groei' ? 'Groei' : 'Pro'),
   }
 
