@@ -11,12 +11,12 @@ import {
 export const ADMIN_EMAIL = (import.meta.env.VITE_ADMIN_EMAIL || 'info@jamaldrenthe.com').toLowerCase().trim()
 
 export const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 'AIzaSyAM7kkHJ36s6p-Mr86zC3KI8SBDd5njsJ4',
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || 'zheavenzy-prod.firebaseapp.com',
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || 'zheavenzy-prod',
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || 'zheavenzy-prod.firebasestorage.app',
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || '341229940060',
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || '1:341229940060:web:876a01be9c56028c4da599',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 'AIzaSyB3i8sMoBpDPDHyMMBaRcNECsnbsK0nmY4',
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || 'zheavenzy-dev.firebaseapp.com',
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || 'zheavenzy-dev',
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || 'zheavenzy-dev.firebasestorage.app',
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || '557199880448',
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || '1:557199880448:web:a726ac45390ba8eac743e5',
 }
 
 // Initialize Firebase App
