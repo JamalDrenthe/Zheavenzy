@@ -149,7 +149,7 @@ export default function Dashboard() {
                     <div className="flex items-center gap-1.5 text-white/50 text-[10px] uppercase font-mono">
                       <KeyRound className="w-3 h-3 text-[#D4AF37]" /> Firebase
                     </div>
-                    <div className="text-white font-semibold mt-1">zheavenzy-prod</div>
+                    <div className="text-white font-semibold mt-1">zheavenzy-dev</div>
                   </div>
                   <div className="p-3 rounded-xl bg-white/5 border border-white/10 col-span-2 sm:col-span-1">
                     <div className="flex items-center gap-1.5 text-white/50 text-[10px] uppercase font-mono">

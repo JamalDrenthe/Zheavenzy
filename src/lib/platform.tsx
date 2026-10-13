@@ -80,6 +80,12 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
             credits: s.credits > 0 ? s.credits : (isAdmin ? 25000 : tierCredits['pro']),
           }
         })
+      } else if (fbUser === null) {
+        setState((s) =>
+          s.user?.provider === 'google' && !s.user.isDemo
+            ? { ...s, user: null }
+            : s
+        )
       }
     })
 
