@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Instagram, Twitter, Youtube, Mail } from 'lucide-react'
+import Logo from './Logo'
 
 const footerGroups = [
   {
@@ -44,11 +45,8 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-12">
           {/* Brand */}
           <div className="col-span-2">
-            <Link to="/" className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-full border border-[#D4AF37] flex items-center justify-center bg-[#0a0a0a]">
-                <span className="text-[#D4AF37] font-bold text-xl" style={{ fontFamily: 'serif', fontStyle: 'italic' }}>Z</span>
-              </div>
-              <span className="font-bold text-xl tracking-[0.2em] text-white">ZHEAVENZY</span>
+            <Link to="/" className="inline-block mb-6">
+              <Logo size={42} />
             </Link>
             <p className="text-white/50 max-w-sm leading-relaxed text-sm">
               Het alles-in-één platform voor de independent artiest.

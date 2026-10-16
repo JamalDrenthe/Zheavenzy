@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X, ChevronDown, LogIn, LogOut, LayoutDashboard, Bell, Crown } from 'lucide-react'
 import { usePlatform } from '../lib/usePlatform'
+import Logo from './Logo'
 
 type NavItem = {
   label: string
@@ -85,11 +86,8 @@ export default function Navbar() {
     <header ref={navRef} className="fixed top-0 left-0 w-full z-50 bg-[#050505] border-b border-white/10 shadow-lg shadow-black/40">
       <nav className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-full border border-[#D4AF37] flex items-center justify-center bg-[#0a0a0a] group-hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all duration-300">
-            <span className="text-[#D4AF37] font-bold text-xl" style={{ fontFamily: 'serif', fontStyle: 'italic' }}>Z</span>
-          </div>
-          <span className="font-bold text-lg tracking-[0.2em] text-white">ZHEAVENZY</span>
+        <Link to="/" className="flex items-center">
+          <Logo size={42} />
         </Link>
 
         {/* Desktop Nav */}
