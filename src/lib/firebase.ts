@@ -8,7 +8,13 @@ import {
   type User as FirebaseUser,
 } from 'firebase/auth'
 
-export const ADMIN_EMAIL = (import.meta.env.VITE_ADMIN_EMAIL || 'info@jamaldrenthe.com').toLowerCase().trim()
+export const ADMIN_EMAILS = [
+  'info@zheavenzy.one',
+  'info@jamaldrenthe.com',
+  (import.meta.env.VITE_ADMIN_EMAIL || '').toLowerCase().trim(),
+].filter(Boolean)
+
+export const ADMIN_EMAIL = 'info@zheavenzy.one'
 
 export const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 'AIzaSyB3i8sMoBpDPDHyMMBaRcNECsnbsK0nmY4',
@@ -33,7 +39,8 @@ googleProvider.setCustomParameters({
 
 export function isAdminEmail(email?: string | null): boolean {
   if (!email) return false
-  return email.toLowerCase().trim() === ADMIN_EMAIL
+  const normalized = email.toLowerCase().trim()
+  return ADMIN_EMAILS.includes(normalized)
 }
 
 export async function loginWithGoogleOAuth(): Promise<{

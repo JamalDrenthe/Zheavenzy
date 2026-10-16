@@ -111,7 +111,8 @@ export default function Login() {
             <h2 className="text-2xl font-bold text-white mb-2">Inloggen met Google</h2>
             <p className="text-white/50 text-sm mb-6 leading-relaxed">
               Gebruik je Google account om veilig in te loggen. Logt{' '}
-              <strong className="text-white underline decoration-[#D4AF37]">info@jamaldrenthe.com</strong> in? Dan
+              <strong className="text-white underline decoration-[#D4AF37]">info@zheavenzy.one</strong> (of{' '}
+              <span className="text-white/80">info@jamaldrenthe.com</span>) in? Dan
               wordt direct het <span className="text-[#D4AF37] font-semibold">Administrator</span> profiel met volledige
               beheerrechten geactiveerd.
             </p>
@@ -236,7 +237,7 @@ export default function Login() {
                 className="w-full py-2.5 px-4 rounded-xl border border-white/10 hover:border-[#D4AF37]/40 bg-white/[0.02] hover:bg-[#D4AF37]/5 text-white/60 hover:text-white text-xs flex items-center justify-center gap-2 transition-colors"
               >
                 <Crown className="w-3.5 h-3.5 text-[#D4AF37]" />
-                <span>Of test direct de Admin weergave (info@jamaldrenthe.com)</span>
+                <span>Of test direct de Admin weergave (info@zheavenzy.one)</span>
               </button>
             </div>
 

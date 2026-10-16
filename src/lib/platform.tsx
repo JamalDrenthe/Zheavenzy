@@ -106,7 +106,7 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         user: {
           tier,
           name: name || (isAdmin ? 'Jamal Drenthe' : 'Gebruiker'),
-          email: email || (isAdmin ? 'info@jamaldrenthe.com' : 'demo@zheavenzy.one'),
+          email: email || (isAdmin ? 'info@zheavenzy.one' : 'demo@zheavenzy.one'),
           bio: options?.bio ?? (isAdmin ? 'Platform Eigenaar & Administrator' : s.user?.bio ?? ''),
           avatar: options?.avatar ?? s.user?.avatar ?? null,
           isAdmin,
@@ -150,7 +150,7 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
             ...s.notifications,
             notify(
               isAdmin
-                ? '👑 Welkom Jamal! Ingelogd via Google OAuth als Administrator.'
+                ? `👑 Welkom! Ingelogd via Google OAuth als Administrator (${email}).`
                 : `Welkom ${name}! Ingelogd via Google OAuth.`
             ),
           ],
@@ -192,7 +192,7 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         })
       } else if (demoId === 'jamal') {
         // Simulatie van Jamal admin account
-        value.login('pro', 'Jamal Drenthe (Admin Demo)', 'info@jamaldrenthe.com', {
+        value.login('pro', 'Zheavenzy Admin (Demo)', 'info@zheavenzy.one', {
           bio: 'Platform Eigenaar & Administrator',
           avatar: null,
           isAdmin: true,
