@@ -222,7 +222,7 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         uploads: [...s.uploads, { title, type, credits: uploadReward, ts: Date.now() }],
         notifications: [
           ...s.notifications,
-          notify(`"${title}" geüpload — +${uploadReward} credits, nu onderdeel van het platform.`),
+          notify(`"${title}" geüpload: +${uploadReward} credits toegevoegd aan je saldo.`),
         ],
       })),
 
@@ -238,7 +238,7 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
       const replies = [
         'Dank voor je bericht! Ik reageer zo snel mogelijk.',
         'Top, laten we de details via de kalender afstemmen.',
-        'Klinkt goed — stuur me gerust meer info.',
+        'Klinkt goed, stuur me gerust meer info.',
       ]
       const reply = replies[Math.floor(Math.random() * replies.length)]
       setTimeout(() => {

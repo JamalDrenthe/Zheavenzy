@@ -49,7 +49,7 @@ const routes = [
 ]
 
 const verschil = [
-  { aspect: 'Contract nodig?', lid: 'Nee — alleen lidmaatschap', getekend: 'Ja, getekende overeenkomst' },
+  { aspect: 'Contract nodig?', lid: 'Nee, alleen een lidmaatschap', getekend: 'Ja, getekende overeenkomst' },
   { aspect: 'Releases uitbrengen', lid: 'Via Zheavenzy op alle platforms', getekend: 'Volledig begeleid door Zheavenzy' },
   { aspect: 'Toegang tot platform', lid: 'Volledig', getekend: 'Volledig + dedicated team' },
   { aspect: 'Marketing & promo', lid: 'Tools & optionele services', getekend: 'Actief gevoerd door Zheavenzy' },
@@ -68,7 +68,7 @@ export default function Platform() {
             Het platform achter <span className="text-gradient-gold">independent succes.</span>
           </>
         }
-        description="Zheavenzy is het ledenplatform dat alle tools, releases en het netwerk bij elkaar brengt. Word lid — of word getekend."
+        description="Zheavenzy is het ledenplatform dat alle tools, releases en het netwerk bij elkaar brengt. Word lid, of laat je tekenen door het label."
       />
 
       {/* Twee routes */}
@@ -144,7 +144,7 @@ export default function Platform() {
                     Uitbrengen op alle platforms, <span className="text-gradient-gold">zonder contract.</span>
                   </>
                 }
-                description="Normaal gesproken heb je een label nodig om je muziek professioneel uit te brengen. Zheavenzy vervangt die rol: als lid breng je je nummers uit op alle streaming platforms — zonder getekend te zijn."
+                description="Normaal gesproken heb je een label nodig om je muziek professioneel uit te brengen. Zheavenzy vervangt die rol: als lid breng je je nummers uit op alle streaming platforms zonder dat je getekend hoeft te zijn."
               />
               <div className="space-y-4 -mt-6">
                 {[
@@ -166,7 +166,7 @@ export default function Platform() {
                   {
                     icon: CheckCircle2,
                     bad: false,
-                    text: 'Betaal alleen je lidmaatschap — geen percentage van je carrière',
+                    text: 'Betaal alleen je lidmaatschap, geen percentage van je carrière',
                   },
                 ].map((item) => (
                   <div key={item.text} className="reveal flex items-start gap-3">
@@ -222,7 +222,7 @@ export default function Platform() {
                 Boek een <span className="text-gradient-gold">auditie.</span>
               </>
             }
-            description="Getekend worden bij Zheavenzy begint met een auditie. Een auditie kost €500 — laat ons horen wie je bent, in drie stappen."
+            description="Getekend worden bij Zheavenzy begint met een auditie. Een auditie kost € 500. Laat ons in drie stappen horen wie je bent."
             center
           />
           <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -248,7 +248,7 @@ export default function Platform() {
           </div>
           <div className="text-center mt-12 reveal">
             <Link to="/contact" className="btn-gold glow-gold inline-flex items-center gap-2 px-8 py-4">
-              Boek een Auditie — €500
+              Boek een Auditie (€ 500)
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

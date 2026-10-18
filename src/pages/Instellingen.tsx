@@ -93,7 +93,7 @@ export default function Instellingen() {
               />
             </div>
             <div>
-              <label className="block text-white/60 text-sm mb-2">Bio — zichtbaar op je profiel</label>
+              <label className="block text-white/60 text-sm mb-2">Bio (zichtbaar op je openbare profiel)</label>
               <textarea
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}

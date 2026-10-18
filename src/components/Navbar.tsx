@@ -25,7 +25,7 @@ const navItems: NavItem[] = [
   {
     label: 'Platform',
     children: [
-      { href: '/platform', label: 'Het Platform', desc: 'Lid of getekend — twee routes' },
+      { href: '/platform', label: 'Het Platform', desc: 'Lid of getekend: twee duidelijke routes' },
       { href: '/platform/releases', label: 'Muziek Uitbrengen', desc: 'Releases op alle platforms, zonder label' },
       { href: '/lidmaatschap', label: 'Lidmaatschappen', desc: 'Drie tiers, één keuze die past' },
     ],

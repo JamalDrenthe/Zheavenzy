@@ -14,7 +14,7 @@ const kansen = [
   {
     icon: Mic2,
     title: 'Optredens & Showcases',
-    desc: 'Van intieme cafés tot regionale festivals — wij koppelen je aan podia die passen bij jouw fase en genre.',
+    desc: 'Van intieme cafés tot regionale festivals, wij koppelen je aan podia die passen bij jouw fase en genre.',
     tag: 'Live',
   },
   {
@@ -52,7 +52,7 @@ export default function Events() {
             Bouw je fanbase <span className="text-gradient-gold">live op.</span>
           </>
         }
-        description="Streams zijn één ding — een zaal die meezingt is goud. Wij verbinden je met regionale events, venues en samenwerkingskansen."
+        description="Streams zijn mooi, maar een zaal die meezingt is onbetaalbaar. Wij verbinden je met regionale events, venues en samenwerkingskansen."
       />
 
       {/* Achtergrond */}
@@ -106,7 +106,7 @@ export default function Events() {
                     Kansen waar je normaal <span className="text-gradient-gold">langs loopt.</span>
                   </>
                 }
-                description="De meeste live-kansen staan niet op een website. Ons netwerk deelt ze intern — jij hoeft alleen aan te haken."
+                description="De meeste live-kansen staan niet openbaar online. Ons netwerk deelt ze onderling, zodat jij direct kunt aanhaken."
               />
               <ul className="grid sm:grid-cols-2 gap-4 -mt-6">
                 {regioKansen.map((item) => (
@@ -157,7 +157,7 @@ export default function Events() {
               <h3 className="text-lg font-bold text-white mb-3">Voor boekers</h3>
               <p className="text-white/50 text-sm leading-relaxed">
                 Zoek je talent voor je event of venue? Doorzoek het netwerk, check reviews en
-                boek direct — met bescherming voor beide kanten.
+                boek direct met duidelijke afspraken en bescherming voor beide kanten.
               </p>
             </div>
           </div>

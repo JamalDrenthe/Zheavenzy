@@ -138,7 +138,7 @@ export default function Lid() {
                 Beschikbaarheid
               </h2>
               <p className="text-white/40 text-xs mb-5">
-                {member.directBook ? 'Direct boeken staat aan — kies een dag.' : 'Deze professional werkt op aanvraag — kies een dag om een aanvraag te sturen.'}
+                {member.directBook ? 'Direct boeken staat aan: kies een gewenste dag.' : 'Deze professional werkt op aanvraag: kies een dag om een aanvraag te sturen.'}
               </p>
               <div className="grid grid-cols-7 gap-2">
                 {dayOffsets.map((o) => {
@@ -168,7 +168,7 @@ export default function Lid() {
                 className="w-full btn-gold glow-gold mt-6 py-3.5 disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 {member.directBook ? 'Boek direct' : 'Stuur boekingsaanvraag'}
-                {selected !== null ? ` — ${dayLabel(selected)}` : ''}
+                {selected !== null ? ` voor ${dayLabel(selected)}` : ''}
               </button>
               {done && (
                 <p className="text-[#D4AF37] text-xs font-semibold mt-3 flex items-center gap-1.5">
@@ -209,7 +209,7 @@ export default function Lid() {
               <h3 className="text-white font-bold mb-3 text-sm">Zo werkt samenwerken</h3>
               <ul className="space-y-3 text-xs text-white/50 leading-relaxed">
                 <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0" /> Boek of stuur een aanvraag met de kalender</li>
-                <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0" /> Betaal met credits — {member.costPerDay} per dag</li>
+                <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0" /> Betaal eenvoudig met credits ({member.costPerDay} per dag)</li>
                 <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0" /> Bespreek details via direct messages</li>
               </ul>
             </motion.div>

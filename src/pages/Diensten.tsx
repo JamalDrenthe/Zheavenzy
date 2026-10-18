@@ -53,7 +53,7 @@ const platformDiensten = [
     href: '/platform',
     icon: BadgeCheck,
     title: 'Over Zheavenzy',
-    desc: 'Het ledenplatform van Zheavenzy. Word lid of laat je tekenen — jij kiest hoe je werkt.',
+    desc: 'Het ledenplatform van Zheavenzy. Word lid of laat je tekenen: jij kiest hoe je werkt.',
   },
   {
     href: '/platform/releases',
@@ -94,7 +94,7 @@ export default function Diensten() {
                 Kies waar je <span className="text-gradient-gold">begint.</span>
               </>
             }
-            description="Vier aandachtsgebieden, één platform. Elke dienst is los te gebruiken — en werkt nog beter samen."
+            description="Vier aandachtsgebieden op één platform. Elke dienst is los te gebruiken en versterkt elkaar direct."
           />
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -150,7 +150,7 @@ export default function Diensten() {
                 Zheavenzy: het hart van <span className="text-gradient-gold">het platform.</span>
               </>
             }
-            description="Zheavenzy is waar lidmaatschap, releases en je volledige artiesten-toolkit samenkomen. Geen label nodig — wel een lidmaatschap."
+            description="Zheavenzy brengt lidmaatschap, releases en je volledige artiesten-toolkit samen. Geen platencontract nodig, wel een lidmaatschap."
           />
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -188,7 +188,7 @@ export default function Diensten() {
             Niet zeker waar je <span className="text-gradient-gold">begint?</span>
           </>
         }
-        description="Vertel ons waar je staat in je carrière — wij denken mee over de beste route."
+        description="Vertel ons waar je staat in je carrière, dan denken we gericht met je mee over de beste route."
         primaryHref="/contact"
         primaryLabel="Vraag Advies"
         secondaryHref="/lidmaatschap"

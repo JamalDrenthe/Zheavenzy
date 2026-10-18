@@ -20,13 +20,13 @@ const diensten = [
   {
     icon: Search,
     title: 'SEO & Content',
-    desc: 'Gevonden worden als fans naar jou zoeken — en als ze naar jouw genre zoeken. Wij optimaliseren je complete online aanwezigheid.',
+    desc: 'Gevonden worden als fans naar jou zoeken, en als ze naar jouw genre zoeken. Wij optimaliseren je complete online aanwezigheid.',
     items: ['Artiest-SEO', 'YouTube optimalisatie', 'Content-strategie', 'Metadata & keywords'],
   },
   {
     icon: Megaphone,
     title: 'Advertising',
-    desc: 'Gerichte campagnes op Meta, TikTok en Google die écht streams opleveren — geen schijnvertoning, meetbaar resultaat.',
+    desc: 'Gerichte campagnes op Meta, TikTok en Google die écht streams opleveren, zonder schijnvertoning en met meetbaar resultaat.',
     items: ['TikTok & Reels ads', 'Meta campagnes', 'Retargeting', 'Budget per fase'],
   },
   {
@@ -49,7 +49,7 @@ export default function Marketing() {
             Word <span className="text-gradient-gold">gevonden.</span>
           </>
         }
-        description="Goede muziek verdient bereik. Wij verzorgen de playlist-pitching, release-strategie en advertenties die jouw luisteraarsgroep laten groeien — meetbaar en transparant."
+        description="Goede muziek verdient bereik. Wij verzorgen de playlist-pitching, release-strategie en advertenties die jouw luisteraarsgroep laten groeien: meetbaar en transparant."
       />
 
       {/* Groei-aanpak */}
@@ -108,7 +108,7 @@ export default function Marketing() {
                     Je ziet precies wat je geld <span className="text-gradient-gold">oplevert.</span>
                   </>
                 }
-                description="Elke campagne krijgt een eigen dashboard: streams, saves, playlist-toevoegingen en kosten per resultaat. Geen vage beloftes — cijfers."
+                description="Elke campagne krijgt een eigen dashboard: streams, saves, playlist-toevoegingen en kosten per resultaat. Geen vage beloftes, maar duidelijke cijfers."
               />
               <ul className="space-y-4 -mt-6">
                 {[
@@ -153,7 +153,7 @@ export default function Marketing() {
             Klaar om te <span className="text-gradient-gold">groeien?</span>
           </>
         }
-        description="Vertel ons over je volgende release — wij schetsen de strategie die erbij past."
+        description="Vertel ons over je volgende release, dan schetsen we samen de marketingstrategie die erbij past."
         primaryHref="/contact"
         primaryLabel="Plan een Campagne"
         secondaryHref="/platform/releases"

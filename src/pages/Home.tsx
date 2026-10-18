@@ -79,7 +79,7 @@ export default function Home() {
                 className="text-lg text-white/65 mb-10 font-normal leading-relaxed max-w-lg"
               >
                 Zheavenzy is de thuisbasis voor de onafhankelijke maker. Breng je muziek uit op alle streamingdiensten, 
-                boek professionele studio's en vind creatief talent — met 100% behoud van je rechten.
+                boek professionele studio's en vind creatief talent met 100% behoud van je rechten.
               </motion.p>
 
               <motion.div
@@ -157,7 +157,7 @@ export default function Home() {
                           <Play className="w-5 h-5 text-[#050505] ml-0.5 fill-[#050505]" />
                         </div>
                         <div className="min-w-0">
-                          <div className="text-white font-semibold text-sm truncate">Luna Voss — Nachtvlucht</div>
+                          <div className="text-white font-semibold text-sm truncate">Luna Voss: Nachtvlucht</div>
                           <div className="text-[#D4AF37] text-xs font-medium">Release via Zheavenzy</div>
                         </div>
                         <div className="ml-auto flex gap-1 items-end h-5 flex-shrink-0">
@@ -409,7 +409,7 @@ export default function Home() {
               <h3 className="text-2xl font-bold mb-3 text-gradient-gold">Zheavenzy Lidmaatschappen</h3>
               <p className="text-white/60 mb-8 leading-relaxed text-sm">
                 Direct toegang tot release-distributie, professionele tools en het creatieve netwerk. 
-                Geen label nodig — jij brengt uit wanneer jij wilt.
+                Je hebt geen platencontract nodig, want je brengt zelfstandig uit wanneer jij wilt.
               </p>
               <ul className="space-y-3.5 mb-8">
                 {[

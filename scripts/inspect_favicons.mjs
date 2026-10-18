@@ -47,7 +47,7 @@ async function main() {
         <div class="tab-bar-dark">
           <div class="tab">
             <img src="data:image/svg+xml;base64,${b64_svg}" width="16" height="16" />
-            <span>Zheavenzy — Het platform voor independent artiesten</span>
+            <span>Zheavenzy: Het platform voor independent artiesten</span>
           </div>
           <div class="tab">
             <img src="data:image/png;base64,${b64_32}" width="16" height="16" />
@@ -61,7 +61,7 @@ async function main() {
         <div class="tab-bar-light">
           <div class="tab-light">
             <img src="data:image/svg+xml;base64,${b64_svg}" width="16" height="16" />
-            <span>Zheavenzy — Het platform voor independent artiesten</span>
+            <span>Zheavenzy: Het platform voor independent artiesten</span>
           </div>
           <div class="tab-light">
             <img src="data:image/png;base64,${b64_32}" width="16" height="16" />

@@ -31,7 +31,7 @@ export default function Leden() {
             Vind wie je <span className="text-gradient-gold">nodig hebt.</span>
           </>
         }
-        description="Artiesten, cameramensen, designers en stylisten — bekijk hun profiel, check hun beschikbaarheid en werk direct samen."
+        description="Artiesten, cameramensen, designers en stylisten: bekijk hun profiel, check hun beschikbaarheid en werk direct samen."
         minHeight="min-h-[50vh]"
       />
 

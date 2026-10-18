@@ -112,7 +112,7 @@ export default function Contact() {
                         onChange={handleChange}
                         required
                         className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-[#D4AF37]/50 transition-colors"
-                        placeholder="jouw@email.nl"
+                        placeholder="jouw@email.com"
                       />
                     </div>
 
@@ -125,7 +125,7 @@ export default function Contact() {
                         className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37]/50 transition-colors appearance-none cursor-pointer"
                       >
                         <option value="artiest">Artiest / Muzikant</option>
-                        <option value="auditie">Artiest — auditie boeken (getekend)</option>
+                        <option value="auditie">Artiest: auditie boeken (getekend label)</option>
                         <option value="boeker">Boeker / Event Organizer</option>
                         <option value="producer">Producer / Creative</option>
                         <option value="andere">Andere</option>
@@ -200,7 +200,7 @@ export default function Contact() {
               <div className="reveal reveal-delay-2 glass-card rounded-2xl p-6 border-[#D4AF37]/20">
                 <h4 className="text-white font-bold mb-2 text-sm">Auditie boeken</h4>
                 <p className="text-white/40 text-xs leading-relaxed">
-                  Wil je getekend worden bij Zheavenzy? Een auditie kost €500. Kies "Auditie boeken" in het formulier en vertel ons wie je bent — we plannen dan een auditiegesprek.
+                  Wil je getekend worden bij Zheavenzy? Een auditie kost € 500. Kies "Auditie boeken" in het formulier en vertel ons wie je bent, dan plannen we een auditiegesprek.
                 </p>
               </div>
 
@@ -268,7 +268,7 @@ export default function Contact() {
               },
               {
                 q: 'Hoe werkt het ledenprogramma met punten?',
-                a: 'Door actief te zijn op het platform — bijvoorbeeld door samen te werken met andere leden, content te delen of events te organiseren — verdien je punten. Deze wissel je aan het einde van de maand in voor gratis gebruik van onze diensten.',
+                a: 'Door actief te zijn op het platform (zoals samenwerken met andere leden, content uploaden of events organiseren) verdien je credits. Deze wissel je aan het einde van de maand in voor onze diensten.',
               },
               {
                 q: 'Kan ik als boeker direct contact leggen met talent?',
@@ -309,7 +309,7 @@ export default function Contact() {
             </h2>
           </div>
           <p className="reveal reveal-delay-1 text-lg text-white/50 mb-8 font-light max-w-xl mx-auto">
-            Of je nu een artiest bent die wil starten of een boeker op zoek naar talent — 
+            Of je nu een artiest bent die wil starten of een boeker op zoek naar talent: 
             samen vinden we de beste oplossing.
           </p>
           <div className="reveal reveal-delay-2">

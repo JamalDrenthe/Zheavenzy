@@ -43,7 +43,7 @@ export default function Dashboard() {
     { icon: Users, title: 'Leden vinden', desc: 'Artiesten, camera, designers en stylisten in het netwerk.', href: '/leden' },
     { icon: MessageSquare, title: 'Berichten', desc: `${Object.keys(messages).length} gesprek${Object.keys(messages).length === 1 ? '' : 'ken'} actief.`, href: '/berichten' },
     { icon: Coins, title: 'Credits', desc: 'Koop bundels of verdien credits met uploads.', href: '/credits' },
-    { icon: UploadCloud, title: 'Kunst uploaden', desc: `Upload werk en verdien credits — ${uploads.length} upload${uploads.length === 1 ? '' : 's'} live.`, href: '/credits' },
+    { icon: UploadCloud, title: 'Kunst uploaden', desc: `Upload werk en verdien credits. ${uploads.length} upload${uploads.length === 1 ? '' : 's'} live.`, href: '/credits' },
     { icon: Bell, title: 'Notificaties', desc: `${notifications.filter((n) => !n.read).length} ongelezen update${notifications.filter((n) => !n.read).length === 1 ? '' : 's'}.`, href: '/notificaties' },
     { icon: Settings, title: 'Instellingen', desc: 'Accountgegevens, profielfoto en bio aanpassen.', href: '/instellingen' },
   ]

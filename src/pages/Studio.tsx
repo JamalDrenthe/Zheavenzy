@@ -33,7 +33,7 @@ const pakketten = [
 ]
 
 const stappen = [
-  { num: '01', title: 'Kies je service', desc: 'Studio-tijd, mixing of mastering — of een combinatie.' },
+  { num: '01', title: 'Kies je service', desc: 'Studio-tijd, mixing, mastering of een combinatie.' },
   { num: '02', title: 'Boek & upload', desc: 'Reserveer direct en upload je stems of demo veilig.' },
   { num: '03', title: 'Werk samen', desc: 'Geef feedback, vraag revisies aan en stuur bij tot het klopt.' },
   { num: '04', title: 'Release-ready', desc: 'Download je master en breng hem uit via Zheavenzy of je eigen weg.' },
@@ -51,7 +51,7 @@ export default function Studio() {
             Jouw sound, <span className="text-gradient-gold">radio-ready.</span>
           </>
         }
-        description="Van eerste take tot definitieve master. Boek studio\'s, werk met ervaren engineers en lever professioneel af — alles via één platform."
+        description="Van eerste take tot definitieve master. Boek studio's, werk met ervaren engineers en lever professioneel af via één platform."
       />
 
       {/* Services */}
@@ -155,7 +155,7 @@ export default function Studio() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid sm:grid-cols-3 gap-6">
             {[
-              { icon: MapPin, title: 'Locaties', desc: 'Studio\'s door heel Nederland — en online sessies wereldwijd.' },
+              { icon: MapPin, title: 'Locaties', desc: 'Studio\'s door heel Nederland, plus online sessies wereldwijd.' },
               { icon: Clock, title: 'Turnaround', desc: 'Mixes binnen 5-7 werkdagen, masters vaak binnen 48 uur.' },
               { icon: CheckCircle2, title: 'Garantie', desc: 'Niet tevreden? Revisies zijn altijd inbegrepen.' },
             ].map((item) => (

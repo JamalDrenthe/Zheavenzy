@@ -14,35 +14,26 @@ async function main() {
   });
 
   const page = await browser.newPage();
-  await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 2 }); // Retina 2x scale for ultra crisp inspection
+  await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 2 });
 
   console.log('Navigating to http://localhost:4173 ...');
   await page.goto('http://localhost:4173', { waitUntil: 'networkidle2' });
 
-  // 1. Screenshot of the entire navbar
-  const header = await page.$('header');
-  if (header) {
-    await header.screenshot({ path: path.join(ARTIFACTS_DIR, 'new_navbar.png') });
-    console.log('Saved new_navbar.png');
-  }
+  // 1. Hero screenshot (showing no particles, authentic guarantees)
+  await page.screenshot({
+    path: path.join(ARTIFACTS_DIR, 'clean_hero_page.png'),
+    clip: { x: 0, y: 0, width: 1440, height: 820 }
+  });
+  console.log('Saved clean_hero_page.png');
 
-  // 2. Zoomed-in screenshot of just the Logo brand mark
-  const logoElement = await page.$('header a');
-  if (logoElement) {
-    await logoElement.screenshot({ path: path.join(ARTIFACTS_DIR, 'new_logo_closeup.png') });
-    console.log('Saved new_logo_closeup.png');
-  }
-
-  // 3. Scroll to footer and take footer logo screenshot
-  const footer = await page.$('footer');
-  if (footer) {
-    await footer.screenshot({ path: path.join(ARTIFACTS_DIR, 'new_footer.png') });
-    console.log('Saved new_footer.png');
-  }
-
-  // 4. Hero section screenshot
-  await page.screenshot({ path: path.join(ARTIFACTS_DIR, 'new_hero_page.png'), clip: { x: 0, y: 0, width: 1440, height: 750 } });
-  console.log('Saved new_hero_page.png');
+  // 2. Navigate to /lidmaatschap to inspect realistic pricing
+  console.log('Navigating to http://localhost:4173/lidmaatschap ...');
+  await page.goto('http://localhost:4173/lidmaatschap', { waitUntil: 'networkidle2' });
+  await page.screenshot({
+    path: path.join(ARTIFACTS_DIR, 'clean_pricing_page.png'),
+    clip: { x: 0, y: 150, width: 1440, height: 850 }
+  });
+  console.log('Saved clean_pricing_page.png');
 
   await browser.close();
   console.log('Inspection complete!');

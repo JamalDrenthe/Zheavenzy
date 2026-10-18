@@ -133,7 +133,7 @@ export default function Lidmaatschap() {
             Kies je <span className="text-gradient-gold">tier.</span>
           </>
         }
-        description="Geen wachtlijst, geen selectie — met een Zheavenzy-lidmaatschap gebruik je meteen het volledige platform. Drie tiers, één keuze die bij jouw fase past."
+        description="Geen wachtlijst, geen selectie: met een Zheavenzy-lidmaatschap gebruik je meteen het volledige platform. Drie tiers, één keuze die bij jouw fase past."
       />
 
       {/* Pricing cards */}

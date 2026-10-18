@@ -65,7 +65,7 @@ export default function Berichten() {
             Praat direct met <span className="text-gradient-gold">het netwerk.</span>
           </>
         }
-        description="Berichten tussen accounts — bespreek samenwerkingen, boekingen en ideeën."
+        description="Directe berichten tussen accounts om samenwerkingen, boekingen en ideeën af te stemmen."
         minHeight="min-h-[40vh]"
       />
 
@@ -144,7 +144,7 @@ export default function Berichten() {
                     </div>
                   </div>
 
-                  {/* Berichten — WhatsApp-achtergrond */}
+                  {/* Berichten: WhatsApp-achtergrond */}
                   <div
                     className="flex-1 overflow-y-auto px-5 py-4 max-h-[460px]"
                     style={{

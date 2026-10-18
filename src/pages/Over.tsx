@@ -113,8 +113,8 @@ export default function Over() {
               </p>
               <p className="text-white/50 leading-relaxed mb-8">
                 In een wereld waar grote labels vaak de regels dicteren, bieden wij een 
-                eerlijk alternatief. Geen 360-deals, geen verborgen constructies — alleen 
-                een dedicated team dat meedenkt en tools die werken.
+                eerlijk alternatief. Geen 360-deals, geen verborgen constructies: alleen 
+                een betrouwbare infrastructuur en tools die werken.
               </p>
 
               <div className="grid grid-cols-2 gap-6">
@@ -178,10 +178,10 @@ export default function Over() {
           <div className="space-y-8">
             {[
               { num: '01', title: 'Distributie, Playlisting & Bereik', desc: 'We optimaliseren je aanwezigheid op streaming platforms en zorgen voor strategische playlist-plaatsingen die je bereik vergroten.' },
-              { num: '02', title: 'Vindbaarheid: SEO, Ads & Marketingcampagnes', desc: 'Van zoekmachineoptimalisatie tot gerichte advertenties — wij zorgen dat je gevonden wordt door de juiste doelgroep.' },
+              { num: '02', title: 'Vindbaarheid: SEO, Ads & Marketingcampagnes', desc: 'Van zoekmachineoptimalisatie tot gerichte advertenties: wij zorgen dat je gevonden wordt door de juiste doelgroep.' },
               { num: '03', title: 'Distributie & Netwerken', desc: 'Wereldwijde distributie naar alle grote platforms, aangevuld met een sterk netwerk van industrieprofessionals.' },
               { num: '04', title: 'Events & Regionale Kansen', desc: 'We verbinden je met regionale events, venues en samenwerkingsmogelijkheden om je lokale fanbase te versterken.' },
-              { num: '05', title: 'Strategisch Bewegen in de Muziekindustrie', desc: 'Data-gedreven inzichten en strategisch advies om de juiste beslissingen te nemen voor je carrière.' },
+              { num: '05', title: 'Onafhankelijk Bouwen aan je Carrière', desc: 'Heldere inzichten en strategisch advies om zelfstandig de juiste keuzes te maken voor je muzikale toekomst.' },
             ].map((item, i) => (
               <motion.div
                 key={item.num}

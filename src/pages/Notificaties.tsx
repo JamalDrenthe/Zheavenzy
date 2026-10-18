@@ -23,7 +23,7 @@ export default function Notificaties() {
             Al je <span className="text-gradient-gold">updates.</span>
           </>
         }
-        description="Boekingen, vriendschapsverzoeken, credits en uploads — alles op één plek."
+        description="Boekingen, vriendschapsverzoeken, credits en uploads: overzichtelijk op één plek."
         minHeight="min-h-[40vh]"
       />
 

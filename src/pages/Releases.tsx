@@ -34,7 +34,7 @@ const stappen = [
     icon: Globe,
     num: '03',
     title: 'Wij distribueren',
-    desc: 'Zheavenzy plaatst je nummer op alle grote platforms in 180+ landen — onder onze release-infrastructuur.',
+    desc: 'Zheavenzy plaatst je nummer op alle grote platforms in 180+ landen, via onze eigen release-infrastructuur.',
   },
   {
     icon: Radio,
@@ -47,7 +47,7 @@ const stappen = [
 const voordelen = [
   {
     title: 'Zonder label',
-    desc: 'Het deel waarvoor je normaal een label nodig had — distributie, release-administratie, platform-relaties — doet Zheavenzy. Jij hoeft niet getekend te zijn.',
+    desc: 'Het werk waarvoor je normaal een platenlabel nodig had (zoals distributie, administratie en platform-relaties) verzorgt Zheavenzy. Je hoeft niet getekend te zijn.',
   },
   {
     title: 'Jouw naam, jouw rechten',
@@ -71,7 +71,7 @@ export default function Releases() {
             Breng je nummer uit. <span className="text-gradient-gold">Overal.</span>
           </>
         }
-        description="Onder Zheavenzy breng je je muziek uit op alle streaming platforms — zonder label, zonder contract. Alleen een lidmaatschap."
+        description="Onder Zheavenzy breng je je muziek uit op alle streaming platforms zonder label en zonder contract. Alleen een lidmaatschap."
       />
 
       {/* Platforms */}

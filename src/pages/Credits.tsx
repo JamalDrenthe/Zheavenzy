@@ -34,7 +34,7 @@ export default function Credits() {
             Betaal en verdien in <span className="text-gradient-gold">credits.</span>
           </>
         }
-        description="Credits zijn de munt van het platform: koop een bundel, of verdien credits door je kunsten te uploaden — die worden onderdeel van het label."
+        description="Credits zijn de munt van het platform: koop een bundel of verdien credits door je tracks en visuals te uploaden voor het label."
         minHeight="min-h-[50vh]"
       />
 
@@ -91,7 +91,7 @@ export default function Credits() {
                 Upload je kunst, verdien credits
               </h2>
               <p className="text-white/40 text-sm leading-relaxed mb-6">
-                Elke upload levert <span className="text-[#D4AF37] font-semibold">+{uploadReward} credits</span> op — en je werk wordt onderdeel van het Zheavenzy-platform en label.
+                Elke upload levert <span className="text-[#D4AF37] font-semibold">+{uploadReward} credits</span> op en je werk wordt onderdeel van het Zheavenzy-platform en label.
               </p>
               <form onSubmit={upload} className="space-y-4">
                 <div>
@@ -121,7 +121,7 @@ export default function Credits() {
                 </button>
                 {uploaded && (
                   <p className="text-[#D4AF37] text-xs font-semibold flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Upload ontvangen — +{uploadReward} credits, nu onderdeel van het platform.
+                    <CheckCircle2 className="w-3.5 h-3.5" /> Upload ontvangen: +{uploadReward} credits toegevoegd aan je saldo.
                   </p>
                 )}
               </form>
@@ -130,7 +130,7 @@ export default function Credits() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card rounded-3xl p-8">
               <h3 className="text-white font-bold mb-4 text-sm">Jouw uploads op het platform</h3>
               {uploads.length === 0 ? (
-                <p className="text-white/30 text-xs">Nog geen uploads. Jouw werk verschijnt hier — en in de catalogus van het label.</p>
+                <p className="text-white/30 text-xs">Nog geen uploads. Jouw werk verschijnt hier en in de catalogus van het label.</p>
               ) : (
                 <div className="space-y-3">
                   {uploads.map((u, i) => (

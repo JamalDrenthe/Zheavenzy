@@ -121,7 +121,7 @@ export default function Netwerk() {
               Ontdek ons <span className="text-gradient-gold">talent.</span>
             </h2>
             <p className="text-white/50 max-w-xl mx-auto">
-              Van producers tot videografen — vind de perfecte creatieve professional voor jouw project.
+              Van producers tot videografen: vind de perfecte creatieve professional voor jouw project.
             </p>
           </div>
 
@@ -185,7 +185,7 @@ export default function Netwerk() {
             <div className="reveal reveal-delay-2 space-y-4">
               {[
                 { icon: Calendar, title: 'Kies een datum', desc: 'Bekijk de beschikbaarheid en kies wat jou uitkomt.' },
-                { icon: MapPin, title: 'Kies een locatie', desc: 'Studio, venue of op locatie — jij bepaalt.' },
+                { icon: MapPin, title: 'Kies een locatie', desc: 'In de studio, op een venue of op locatie: jij bepaalt.' },
                 { icon: Clock, title: 'Bevestig & betaal', desc: 'Veilig betalen via ons platform met bescherming.' },
               ].map((step, i) => (
                 <motion.div
@@ -250,7 +250,7 @@ export default function Netwerk() {
               </p>
               <p className="text-white/50 leading-relaxed mb-8">
                 Of je nu een producer zoekt voor je volgende single, een fotograaf 
-                voor je albumcover, of een complete band voor een event — bij Zheavenzy 
+                voor je albumcover, of een complete band voor een event: bij Zheavenzy 
                 vind je wat je zoekt.
               </p>
               <Link to="/contact" className="btn-outline inline-flex items-center gap-2">
@@ -272,7 +272,7 @@ export default function Netwerk() {
             </h2>
           </div>
           <p className="reveal reveal-delay-1 text-lg text-white/50 mb-8 font-light max-w-xl mx-auto">
-            Of je nu talent zoekt of zelf talent bent — meld je aan en ontdek de mogelijkheden.
+            Of je nu creatief talent zoekt of zelf talent bent: meld je aan en ontdek de mogelijkheden.
           </p>
           <div className="reveal reveal-delay-2 flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact" className="btn-gold glow-gold flex items-center justify-center gap-2">
