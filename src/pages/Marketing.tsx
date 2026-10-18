@@ -31,9 +31,9 @@ const diensten = [
   },
   {
     icon: Globe,
-    title: 'Internationale Hypes',
-    desc: 'Van lokale buzz naar grensoverschrijdende aandacht. Wij timen en plaatsen internationale pushes op het juiste moment.',
-    items: ['Regionale launches', 'Cross-border playlists', 'PR & media outreach', '180+ landen bereik'],
+    title: 'Internationaal Bereik',
+    desc: 'Van lokale bekendheid naar grensoverschrijdende aandacht. Wij timen en plaatsen gerichte release-campagnes op het juiste moment.',
+    items: ['Regionale launches', 'Cross-border playlists', 'PR & media outreach', 'Wereldwijde streamingfocus'],
   },
 ]
 
@@ -49,7 +49,7 @@ export default function Marketing() {
             Word <span className="text-gradient-gold">gevonden.</span>
           </>
         }
-        description="Goede muziek verdient bereik. Wij bouwen de vindbaarheid, de hypes en de campagnes die jouw streams laten groeien — meetbaar en transparant."
+        description="Goede muziek verdient bereik. Wij verzorgen de playlist-pitching, release-strategie en advertenties die jouw luisteraarsgroep laten groeien — meetbaar en transparant."
       />
 
       {/* Groei-aanpak */}

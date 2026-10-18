@@ -27,9 +27,9 @@ const diensten = [
   {
     icon: TrendingUp,
     num: '02',
-    title: 'Vindbaarheid & Hypes',
-    desc: 'Wij boosten je streams met strategische playlisting, SEO-optimalisatie, gerichte advertenties en marketingcampagnes die jouw muziek onder de juiste doelgroep brengen.',
-    features: ['Strategische playlisting', 'SEO & content optimalisatie', 'Social media advertising', 'Internationale hypes'],
+    title: 'Zichtbaarheid & Playlists',
+    desc: 'Gerichte editorial en independent playlist-pitching, metadata-optimalisatie en effectieve social media campagnes die jouw muziek onder de aandacht brengen van echte muziekliefhebbers.',
+    features: ['Editorial & independent pitching', 'SEO & metadata optimalisatie', 'Social media advertising', 'Internationaal bereik'],
   },
   {
     icon: Mic2,
@@ -62,10 +62,10 @@ const diensten = [
 ]
 
 const stats = [
-  { value: '500M+', label: 'Streams beheerd' },
-  { value: '2,500+', label: 'Actieve artiesten' },
-  { value: '180+', label: 'Landen bereikt' },
-  { value: '99.8%', label: 'Uptime garantie' },
+  { value: '100%', label: 'Masterrechten behoud' },
+  { value: '15+', label: 'Streamingplatforms' },
+  { value: '48u', label: 'Release kwaliteitscheck' },
+  { value: '0%', label: 'Label lock-in' },
 ]
 
 export default function Artiesten() {

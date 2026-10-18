@@ -32,10 +32,10 @@ const footerGroups = [
 ]
 
 const socialLinks = [
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Youtube, href: '#', label: 'YouTube' },
-  { icon: Mail, href: 'mailto:info@zheavenzy.nl', label: 'Email' },
+  { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
+  { icon: Twitter, href: 'https://x.com', label: 'Twitter' },
+  { icon: Youtube, href: 'https://youtube.com', label: 'YouTube' },
+  { icon: Mail, href: 'mailto:info@zheavenzy.one', label: 'Email' },
 ]
 
 export default function Footer() {
@@ -49,9 +49,8 @@ export default function Footer() {
               <Logo size={42} />
             </Link>
             <p className="text-white/50 max-w-sm leading-relaxed text-sm">
-              Het alles-in-één platform voor de independent artiest.
-              Wij faciliteren, jij creëert — geen wurgcontracten,
-              volledige transparantie.
+              Het platform voor onafhankelijke artiesten, producers en makers. 
+              Breng je muziek wereldwijd uit met 100% eigenaarschap over je werk.
             </p>
             <div className="flex gap-4 mt-6">
               {socialLinks.map((social) => (

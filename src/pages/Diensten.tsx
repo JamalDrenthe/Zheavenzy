@@ -36,7 +36,7 @@ const dienstenGroepen = [
     num: '03',
     title: 'Marketing & Groei',
     desc: 'Strategische playlisting, SEO, advertenties en campagnes die jouw muziek onder de juiste doelgroep brengen.',
-    highlights: ['Strategische playlisting', 'Gerichte advertenties', 'Internationale hypes'],
+    highlights: ['Strategische playlisting', 'Gerichte advertenties', 'Internationaal bereik'],
   },
   {
     href: '/diensten/events',

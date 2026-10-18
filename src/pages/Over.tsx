@@ -37,19 +37,19 @@ const waarden = [
 
 const testimonials = [
   {
-    quote: 'Zheavenzy gaf me de tools en het netwerk om mijn muziek serieus te nemen. Eindelijk een platform dat artiesten écht centraal stelt.',
-    name: 'Maya Chen',
-    role: 'Independent Artiest',
+    quote: 'Dankzij Zheavenzy bracht ik mijn EP uit zonder mijn masterrechten af te staan. Mijn tracks staan op alle streamingdiensten en ik boek rechtstreeks sessies met producers uit het netwerk.',
+    name: 'Luna Voss',
+    role: 'R&B & Soul Artiest',
   },
   {
-    quote: 'De transparantie is verfrissend. Ik weet precies wat ik verdien en waar ik aan toe ben. Geen verrassingen, alleen resultaat.',
-    name: 'Jordan Blake',
-    role: 'Producer & Songwriter',
+    quote: 'Geen gedoe met vage contracten of tussenpersonen. Via het platform werk ik wekelijks met talentvolle vocalisten en worden split-sheets en credits meteen helder vastgelegd.',
+    name: 'Kai Bernhard',
+    role: 'Producer & Beatmaker',
   },
   {
-    quote: 'Via Zheavenzy heb ik fantastische sessiemuzikanten gevonden voor mijn album. Het netwerk is goud waard.',
-    name: 'Sofia Reyes',
-    role: 'Zangeres',
+    quote: 'Artiesten weten precies wat ze krijgen: clips geschoten op cinema gear met professionele color grading. Duidelijke afspraken, directe boekingen via het platform.',
+    name: 'Mara Chen',
+    role: 'Videograaf & Regisseur',
   },
 ]
 
@@ -119,12 +119,12 @@ export default function Over() {
 
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <div className="text-3xl font-bold text-gradient-gold">2019</div>
-                  <div className="text-xs text-white/40 uppercase tracking-wider mt-1">Oprichting</div>
+                  <div className="text-3xl font-bold text-gradient-gold">100%</div>
+                  <div className="text-xs text-white/40 uppercase tracking-wider mt-1">Rechtenbehoud</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-gradient-gold">2,500+</div>
-                  <div className="text-xs text-white/40 uppercase tracking-wider mt-1">Artiesten</div>
+                  <div className="text-3xl font-bold text-gradient-gold">0%</div>
+                  <div className="text-xs text-white/40 uppercase tracking-wider mt-1">360-Constructies</div>
                 </div>
               </div>
             </div>
@@ -177,7 +177,7 @@ export default function Over() {
 
           <div className="space-y-8">
             {[
-              { num: '01', title: 'Streams, Playlisting & Internationale Hypes', desc: 'We optimaliseren je aanwezigheid op streaming platforms en zorgen voor strategische playlist-plaatsingen die je bereik vergroten.' },
+              { num: '01', title: 'Distributie, Playlisting & Bereik', desc: 'We optimaliseren je aanwezigheid op streaming platforms en zorgen voor strategische playlist-plaatsingen die je bereik vergroten.' },
               { num: '02', title: 'Vindbaarheid: SEO, Ads & Marketingcampagnes', desc: 'Van zoekmachineoptimalisatie tot gerichte advertenties — wij zorgen dat je gevonden wordt door de juiste doelgroep.' },
               { num: '03', title: 'Distributie & Netwerken', desc: 'Wereldwijde distributie naar alle grote platforms, aangevuld met een sterk netwerk van industrieprofessionals.' },
               { num: '04', title: 'Events & Regionale Kansen', desc: 'We verbinden je met regionale events, venues en samenwerkingsmogelijkheden om je lokale fanbase te versterken.' },

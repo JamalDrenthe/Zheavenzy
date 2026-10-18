@@ -23,56 +23,56 @@ const talentCategories = [
   {
     icon: Headphones,
     title: 'Producers',
-    description: 'Professionele producers met ervaring in diverse genres. Van beatmakers tot volledige productie.',
-    count: '120+',
+    description: 'Ervaren producers in diverse genres. Van unieke beatproductie tot complete songarrangementen.',
+    tag: 'Studio & Beats',
   },
   {
     icon: Mic2,
-    title: 'Zangeressen',
-    description: 'Getalenteerde vocalisten voor sessies, features en live-optredens in elk genre.',
-    count: '85+',
+    title: 'Zangeressen & Vocalisten',
+    description: 'Getalenteerde vocalisten voor studio-sessies, toplines, featurings en live-optredens.',
+    tag: 'Toplines & Feats',
   },
   {
     icon: Music,
     title: 'Songwriters',
-    description: 'Creatieve songwriters die meedenken over tekst, melodie en arrangement.',
-    count: '95+',
+    description: 'Creatieve songwriters die meedenken over sterke hooks, Nederlandse of Engelse teksten en melodie.',
+    tag: 'Tekst & Melodie',
   },
   {
     icon: Radio,
     title: "DJ's",
-    description: 'Ervaring DJ\'s voor clubs, festivals, privé-events en radioshows.',
-    count: '60+',
+    description: 'DJ\'s voor clubavonden, festivalpodia, releasefeesten en radioshows.',
+    tag: 'Club & Live',
   },
   {
     icon: Zap,
     title: 'Sound Engineers',
-    description: 'Technische experts voor mixing, mastering en live-geluid.',
-    count: '70+',
+    description: 'Gespecialiseerd in akoestiek, tracking, professionele mixing en club/streaming mastering.',
+    tag: 'Mix & Master',
   },
   {
     icon: Guitar,
-    title: 'Gitaristen',
-    description: 'Virtuoze gitaristen voor studio-sessies en live-optredens.',
-    count: '45+',
+    title: 'Gitaristen & Sessiemuzikanten',
+    description: 'Sessiemuzikanten die live instrumenten inspeelt voor die authentieke, organische feel in je track.',
+    tag: 'Sessie & Live',
   },
   {
     icon: Users,
     title: 'Drummers & Blazers',
-    description: 'Rhythm section en blazers voor dat extra laagje in je productie.',
-    count: '55+',
+    description: 'Strakke ritmesecties en blazers voor die extra energie en dynamiek in je sound.',
+    tag: 'Ritme & Koper',
   },
   {
     icon: Camera,
     title: 'Fotografen',
-    description: 'Professionele fotografen voor artist branding, covers en promo-materiaal.',
-    count: '40+',
+    description: 'Specialisten in artist-branding, single artwork, persfoto\'s en eventregistraties.',
+    tag: 'Cover & Pers',
   },
   {
     icon: Video,
     title: 'Videografen',
-    description: 'Videoprofessionals voor clips, behind-the-scenes en promo-content.',
-    count: '35+',
+    description: 'Cinematische videoclips, behind-the-scenes content en video-visuals voor Spotify en socials.',
+    tag: 'Clips & Visuals',
   },
 ]
 
@@ -139,7 +139,9 @@ export default function Netwerk() {
                   <div className="w-12 h-12 bg-[#1a1a1a] rounded-xl flex items-center justify-center border border-[#D4AF37]/10 group-hover:bg-[#D4AF37]/10 transition-colors">
                     <cat.icon className="w-5 h-5 text-[#D4AF37]" />
                   </div>
-                  <span className="text-[#D4AF37] font-bold text-sm">{cat.count}</span>
+                  <span className="text-[#D4AF37] font-semibold text-xs tracking-wider uppercase border border-[#D4AF37]/20 rounded-full px-2.5 py-1 bg-[#D4AF37]/5">
+                    {cat.tag}
+                  </span>
                 </div>
                 <h3 className="text-lg font-bold text-white mb-2">{cat.title}</h3>
                 <p className="text-white/50 text-sm leading-relaxed">{cat.description}</p>
