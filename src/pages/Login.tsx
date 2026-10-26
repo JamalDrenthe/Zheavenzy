@@ -16,6 +16,7 @@ import {
   ChevronUp,
 } from 'lucide-react'
 import PageHero from '../components/PageHero'
+import { LogoIcon } from '../components/Logo'
 import { usePlatform } from '../lib/usePlatform'
 import type { Tier } from '../lib/data'
 
@@ -104,9 +105,12 @@ export default function Login() {
           <div className="glass-card rounded-3xl p-8 md:p-10 border border-[#D4AF37]/30 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#D4AF37]/5 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="flex items-center gap-2 text-[#D4AF37] text-xs font-semibold uppercase tracking-widest mb-2">
-              <ShieldCheck className="w-4 h-4" />
-              Officiële Toegang & Beheer
+            <div className="flex items-center justify-between gap-4 mb-3">
+              <div className="flex items-center gap-2 text-[#D4AF37] text-xs font-semibold uppercase tracking-widest">
+                <ShieldCheck className="w-4 h-4" />
+                Officiële Toegang & Beheer
+              </div>
+              <LogoIcon size={38} className="opacity-95" />
             </div>
             <h2 className="text-2xl font-bold text-white mb-2">Inloggen met Google</h2>
             <p className="text-white/50 text-sm mb-6 leading-relaxed">

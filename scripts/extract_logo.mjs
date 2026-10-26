@@ -66,7 +66,7 @@ async function processLogo() {
     }
   })
   .extract({ left: cropLeft, top: cropTop, width: cropSize, height: cropSize })
-  .png({ quality: 100, compressionLevel: 9 })
+  .png({ compressionLevel: 9, palette: false })
   .toFile('public/images/logo-mark-transparent.png');
 
   console.log('Saved public/images/logo-mark-transparent.png');
