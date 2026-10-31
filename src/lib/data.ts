@@ -1,6 +1,55 @@
 export type Tier = 'start' | 'groei' | 'pro'
 export type Role = 'artiest' | 'camera' | 'designer' | 'stylist'
 
+export interface RoleConfig {
+  key: Role
+  label: string
+  title: string
+  desc: string
+  badge: string
+  iconName: string
+  defaultServices: string[]
+}
+
+export const roleConfigs: Record<Role, RoleConfig> = {
+  artiest: {
+    key: 'artiest',
+    label: 'Artiest / Muzikant',
+    title: 'Muziek & Vocalen',
+    desc: 'Zangers, rappers, songwriters, instrumentalisten & producers.',
+    badge: 'Artiest',
+    iconName: 'Mic2',
+    defaultServices: ['Studiozang', 'Writing camps', 'Live optredens', 'Track feature'],
+  },
+  camera: {
+    key: 'camera',
+    label: 'Camera & Video',
+    title: 'Visuele Productie',
+    desc: 'Videografen, clipregisseurs en artwork fotografen.',
+    badge: 'Visual Maker',
+    iconName: 'Video',
+    defaultServices: ['Videoclips', 'Live-registraties', 'Social content', 'Cover-shoots'],
+  },
+  designer: {
+    key: 'designer',
+    label: 'Graphic Designer',
+    title: 'Art Direction & Branding',
+    desc: 'Album covers, Spotify canvas, merchandise en merkidentiteit.',
+    badge: 'Designer',
+    iconName: 'Palette',
+    defaultServices: ['Single/album artwork', 'Logo & huisstijl', 'Spotify canvas', 'Social templates'],
+  },
+  stylist: {
+    key: 'stylist',
+    label: 'Stylist & Creative Director',
+    title: 'Mode & Podium Image',
+    desc: 'Wardrobe planning, shoot styling en podium appearance.',
+    badge: 'Stylist',
+    iconName: 'Sparkles',
+    defaultServices: ['Shoot styling', 'Podium-looks', 'Wardrobe planning', 'Styling advies'],
+  },
+}
+
 export interface Member {
   id: string
   name: string

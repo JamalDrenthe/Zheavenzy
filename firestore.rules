@@ -1,17 +1,305 @@
 rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    // ===============================================================
+    // Assumed Data Model & Architecture
+    // ===============================================================
+    //
+    // Zheavenzy Platform (music platform & creative network)
+    // Projects: zheavenzy-dev & zheavenzy-prod
+    //
+    // Collection: users/{userId}
+    // Document ID: Firebase Auth UID
+    // Fields:
+    //   - name: string (required, 1-100 chars)
+    //   - email: string (required, 5-150 chars)
+    //   - role: string (optional, 'artiest' | 'camera' | 'designer' | 'stylist' | 'admin')
+    //   - tier: string (optional, 'start' | 'groei' | 'pro')
+    //   - bio: string (optional, <= 2000 chars)
+    //   - avatar: string | null (optional, <= 1000 chars)
+    //   - credits: number (optional, >= 0)
+    //   - isAdmin: bool (optional, privileged)
+    //   - isDemo: bool (optional)
+    //   - provider: string (optional, <= 50 chars)
+    //   - tagline: string (optional, <= 300 chars)
+    //   - services: list of strings (optional, <= 50 items)
+    //   - followers: number or list (optional)
+    //   - following: list of strings (optional, <= 5000 items)
+    //   - friends: list of strings (optional, <= 5000 items)
+    //   - pendingFriends: list of strings (optional, <= 5000 items)
+    //   - createdAt: timestamp | string (optional, immutable on update)
+    //   - updatedAt: timestamp | string (optional)
+    //
+    // Subcollection: users/{userId}/notifications/{notificationId}
+    // Document ID: Auto-generated / sequential ID
+    // Fields:
+    //   - id: number | string (optional)
+    //   - text: string (required, 1-1000 chars)
+    //   - read: bool (optional)
+    //   - ts: number (optional)
+    //   - createdAt: timestamp | string (optional)
+    //
+    // Collection: bookings/{bookingId}
+    // Document ID: Auto-generated booking ID
+    // Fields:
+    //   - userId: string (required, requester UID, immutable)
+    //   - memberId: string (required, booked creative ID/UID, immutable)
+    //   - date: string | timestamp (required)
+    //   - status: string (optional: 'aanvraag', 'bevestigd', 'geannuleerd', 'afgerond')
+    //   - notes: string (optional, <= 1000 chars)
+    //   - price: number (optional, >= 0)
+    //   - createdAt: timestamp | string (optional)
+    //   - updatedAt: timestamp | string (optional)
+    //
+    // Collection: messages/{messageId}
+    // Document ID: Auto-generated message ID
+    // Fields:
+    //   - senderId: string (required, sender UID, immutable)
+    //   - recipientId: string (required, recipient UID/memberId, immutable)
+    //   - text: string (required, 1-5000 chars)
+    //   - read: bool (optional)
+    //   - from: string (optional, <= 50 chars)
+    //   - ts: number (optional)
+    //   - createdAt: timestamp | string (optional)
+    //
+    // Collection: uploads/{uploadId}
+    // Document ID: Auto-generated upload ID
+    // Fields:
+    //   - userId: string (required, owner UID, immutable)
+    //   - title: string (required, 1-200 chars)
+    //   - type: string (required, 1-100 chars)
+    //   - credits: number (optional, >= 0)
+    //   - url / fileUrl: string (optional, <= 1000 chars)
+    //   - description: string (optional, <= 2000 chars)
+    //   - ts: number (optional)
+    //   - createdAt: timestamp | string (optional)
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+
     function signedIn() {
       return request.auth != null;
     }
 
     function isAdmin() {
       return signedIn() && (
-        request.auth.token.email in ['info@zheavenzy.one', 'info@jamaldrenthe.com'] ||
+        ('email' in request.auth.token && request.auth.token.email in ['info@zheavenzy.one', 'info@jamaldrenthe.com']) ||
         request.auth.token.get('admin', false) == true
       );
     }
 
+    function isOwner(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    // ===============================================================
+    // Domain Validators
+    // ===============================================================
+
+    function isValidUser(data) {
+      return data.keys().hasOnly([
+        'name', 'email', 'role', 'tier', 'bio', 'avatar',
+        'credits', 'isAdmin', 'isDemo', 'provider', 'tagline',
+        'services', 'followers', 'following', 'friends', 'pendingFriends',
+        'createdAt', 'updatedAt'
+      ]) &&
+      (!('name' in data) || (data.name is string && data.name.size() > 0 && data.name.size() <= 100)) &&
+      (!('email' in data) || (data.email is string && data.email.size() > 0 && data.email.size() <= 150)) &&
+      (!('role' in data) || data.role in ['artiest', 'camera', 'designer', 'stylist', 'admin']) &&
+      (!('tier' in data) || data.tier in ['start', 'groei', 'pro']) &&
+      (!('bio' in data) || (data.bio is string && data.bio.size() <= 2000)) &&
+      (!('avatar' in data) || data.avatar == null || (data.avatar is string && data.avatar.size() <= 1000)) &&
+      (!('credits' in data) || (data.credits is number && data.credits >= 0 && data.credits <= 10000000)) &&
+      (!('isAdmin' in data) || data.isAdmin is bool) &&
+      (!('isDemo' in data) || data.isDemo is bool) &&
+      (!('provider' in data) || (data.provider is string && data.provider.size() <= 50)) &&
+      (!('tagline' in data) || (data.tagline is string && data.tagline.size() <= 300)) &&
+      (!('services' in data) || (data.services is list && data.services.size() <= 50)) &&
+      (!('followers' in data) || (data.followers is number && data.followers >= 0) || (data.followers is list && data.followers.size() <= 5000)) &&
+      (!('following' in data) || (data.following is list && data.following.size() <= 5000)) &&
+      (!('friends' in data) || (data.friends is list && data.friends.size() <= 5000)) &&
+      (!('pendingFriends' in data) || (data.pendingFriends is list && data.pendingFriends.size() <= 5000)) &&
+      (!('createdAt' in data) || data.createdAt is timestamp || data.createdAt is string) &&
+      (!('updatedAt' in data) || data.updatedAt is timestamp || data.updatedAt is string);
+    }
+
+    function isValidNotification(data) {
+      return data.keys().hasOnly(['id', 'text', 'ts', 'read', 'createdAt']) &&
+        'text' in data && data.text is string && data.text.size() > 0 && data.text.size() <= 1000 &&
+        (!('read' in data) || data.read is bool) &&
+        (!('id' in data) || data.id is number || data.id is string) &&
+        (!('ts' in data) || data.ts is number) &&
+        (!('createdAt' in data) || data.createdAt is timestamp || data.createdAt is string);
+    }
+
+    function isValidBooking(data) {
+      return data.keys().hasOnly(['userId', 'memberId', 'date', 'status', 'createdAt', 'notes', 'price', 'updatedAt']) &&
+        'userId' in data && data.userId is string && data.userId.size() > 0 && data.userId.size() <= 100 &&
+        'memberId' in data && data.memberId is string && data.memberId.size() > 0 && data.memberId.size() <= 100 &&
+        'date' in data && (data.date is string || data.date is timestamp) &&
+        (!('status' in data) || (data.status is string && data.status in ['aanvraag', 'bevestigd', 'geannuleerd', 'afgerond'])) &&
+        (!('notes' in data) || (data.notes is string && data.notes.size() <= 1000)) &&
+        (!('price' in data) || (data.price is number && data.price >= 0)) &&
+        (!('createdAt' in data) || data.createdAt is timestamp || data.createdAt is string) &&
+        (!('updatedAt' in data) || data.updatedAt is timestamp || data.updatedAt is string);
+    }
+
+    function isValidMessage(data) {
+      return data.keys().hasOnly(['senderId', 'recipientId', 'text', 'createdAt', 'read', 'from', 'ts']) &&
+        'senderId' in data && data.senderId is string && data.senderId.size() > 0 && data.senderId.size() <= 100 &&
+        'recipientId' in data && data.recipientId is string && data.recipientId.size() > 0 && data.recipientId.size() <= 100 &&
+        'text' in data && data.text is string && data.text.size() > 0 && data.text.size() <= 5000 &&
+        (!('read' in data) || data.read is bool) &&
+        (!('from' in data) || (data.from is string && data.from.size() <= 50)) &&
+        (!('ts' in data) || data.ts is number) &&
+        (!('createdAt' in data) || data.createdAt is timestamp || data.createdAt is string);
+    }
+
+    function isValidUpload(data) {
+      return data.keys().hasOnly(['userId', 'title', 'type', 'credits', 'createdAt', 'ts', 'url', 'fileUrl', 'description']) &&
+        'userId' in data && data.userId is string && data.userId.size() > 0 && data.userId.size() <= 100 &&
+        'title' in data && data.title is string && data.title.size() > 0 && data.title.size() <= 200 &&
+        'type' in data && data.type is string && data.type.size() > 0 && data.type.size() <= 100 &&
+        (!('credits' in data) || (data.credits is number && data.credits >= 0)) &&
+        (!('ts' in data) || data.ts is number) &&
+        (!('url' in data) || (data.url is string && data.url.size() <= 1000)) &&
+        (!('fileUrl' in data) || (data.fileUrl is string && data.fileUrl.size() <= 1000)) &&
+        (!('description' in data) || (data.description is string && data.description.size() <= 2000)) &&
+        (!('createdAt' in data) || data.createdAt is timestamp || data.createdAt is string);
+    }
+
+    // ===============================================================
+    // Rules Definition
+    // ===============================================================
+
+    // User profiles & member network directory
+    match /users/{userId} {
+      // Authenticated users can discover/view member profiles
+      allow read: if signedIn();
+
+      // Create: Owner or Admin. Non-admins cannot elevate privileges (isAdmin: true or role: 'admin')
+      allow create: if signedIn() && isValidUser(request.resource.data) && (
+        (
+          isOwner(userId) &&
+          request.resource.data.get('isAdmin', false) == false &&
+          request.resource.data.get('role', 'artiest') != 'admin'
+        ) ||
+        isAdmin()
+      );
+
+      // Update: Owner or Admin. Non-admins cannot alter admin flag or elevate role
+      allow update: if signedIn() && isValidUser(request.resource.data) && (
+        (
+          isOwner(userId) &&
+          request.resource.data.get('isAdmin', false) == resource.data.get('isAdmin', false) &&
+          (request.resource.data.get('role', resource.data.get('role', 'artiest')) != 'admin' || resource.data.get('role', '') == 'admin') &&
+          (!('createdAt' in resource.data) || request.resource.data.get('createdAt', resource.data.createdAt) == resource.data.createdAt)
+        ) ||
+        isAdmin()
+      );
+
+      // Delete: Owner or Admin
+      allow delete: if signedIn() && (isOwner(userId) || isAdmin());
+
+      // User notifications subcollection
+      match /notifications/{notificationId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow create: if (isOwner(userId) && isValidNotification(request.resource.data)) || isAdmin();
+        allow update: if (isOwner(userId) && isValidNotification(request.resource.data)) || isAdmin();
+        allow delete: if isOwner(userId) || isAdmin();
+      }
+    }
+
+    // Bookings between members and clients/artists
+    match /bookings/{bookingId} {
+      allow read: if signedIn() && (
+        resource.data.userId == request.auth.uid ||
+        resource.data.memberId == request.auth.uid ||
+        isAdmin()
+      );
+
+      allow create: if signedIn() && isValidBooking(request.resource.data) && (
+        request.resource.data.userId == request.auth.uid ||
+        isAdmin()
+      );
+
+      allow update: if signedIn() && isValidBooking(request.resource.data) && (
+        (
+          (resource.data.userId == request.auth.uid || resource.data.memberId == request.auth.uid) &&
+          request.resource.data.userId == resource.data.userId &&
+          request.resource.data.memberId == resource.data.memberId
+        ) ||
+        isAdmin()
+      );
+
+      allow delete: if signedIn() && (
+        resource.data.userId == request.auth.uid ||
+        resource.data.memberId == request.auth.uid ||
+        isAdmin()
+      );
+    }
+
+    // Direct Messages between members
+    match /messages/{messageId} {
+      allow read: if signedIn() && (
+        resource.data.senderId == request.auth.uid ||
+        resource.data.recipientId == request.auth.uid ||
+        isAdmin()
+      );
+
+      allow create: if signedIn() && isValidMessage(request.resource.data) && (
+        request.resource.data.senderId == request.auth.uid ||
+        isAdmin()
+      );
+
+      allow update: if signedIn() && isValidMessage(request.resource.data) && (
+        (
+          (resource.data.senderId == request.auth.uid || resource.data.recipientId == request.auth.uid) &&
+          request.resource.data.senderId == resource.data.senderId &&
+          request.resource.data.recipientId == resource.data.recipientId
+        ) ||
+        isAdmin()
+      );
+
+      allow delete: if signedIn() && (
+        resource.data.senderId == request.auth.uid ||
+        resource.data.recipientId == request.auth.uid ||
+        isAdmin()
+      );
+    }
+
+    // Creative Uploads & Media Portfolios
+    match /uploads/{uploadId} {
+      allow read: if signedIn();
+
+      allow create: if signedIn() && isValidUpload(request.resource.data) && (
+        request.resource.data.userId == request.auth.uid ||
+        isAdmin()
+      );
+
+      allow update: if signedIn() && isValidUpload(request.resource.data) && (
+        (
+          resource.data.userId == request.auth.uid &&
+          request.resource.data.userId == resource.data.userId
+        ) ||
+        isAdmin()
+      );
+
+      allow delete: if signedIn() && (
+        resource.data.userId == request.auth.uid ||
+        isAdmin()
+      );
+    }
+
+    // ===============================================================
+    // Fallback Catch-All
+    // ===============================================================
+    // Deny all unhandled documents for non-admins, full access for admins
     match /{document=**} {
       allow read, write: if isAdmin();
     }

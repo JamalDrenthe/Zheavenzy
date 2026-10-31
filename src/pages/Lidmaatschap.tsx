@@ -11,10 +11,13 @@ import {
   Crown,
 } from 'lucide-react'
 import PageHero, { CtaSection, SectionIntro } from '../components/PageHero'
+import { usePlatform } from '../lib/usePlatform'
+import type { Tier as PlatformTier } from '../lib/data'
 
 type BillingPeriod = 'maand' | 'kwartaal' | 'jaar'
 
 type Tier = {
+  key: PlatformTier
   icon: typeof Sparkles
   name: string
   tagline: string
@@ -39,6 +42,7 @@ const monthsInPeriod: Record<BillingPeriod, number> = { maand: 1, kwartaal: 3, j
 
 const tiers: Tier[] = [
   {
+    key: 'start',
     icon: Sparkles,
     name: 'Start',
     tagline: 'Voor wie net begint met releasen',
@@ -60,6 +64,7 @@ const tiers: Tier[] = [
     highlight: false,
   },
   {
+    key: 'groei',
     icon: Zap,
     name: 'Groei',
     tagline: 'Voor artiesten die structureel releasen',
@@ -85,6 +90,7 @@ const tiers: Tier[] = [
     badge: 'Meest gekozen',
   },
   {
+    key: 'pro',
     icon: Crown,
     name: 'Pro',
     tagline: 'Voor wie er professioneel voor gaat',
@@ -121,8 +127,16 @@ const vergelijking = [
 
 export default function Lidmaatschap() {
   useScrollReveal()
+  const { user, setTier } = usePlatform()
   const [period, setPeriod] = useState<BillingPeriod>('jaar')
+  const [feedback, setFeedback] = useState<string | null>(null)
   const activePeriod = periods.find((p) => p.key === period)!
+
+  const handleSelectTier = (tKey: PlatformTier) => {
+    setTier(tKey)
+    setFeedback(`Je lidmaatschap is succesvol gewijzigd naar ${tKey.toUpperCase()} in Cloud Firestore!`)
+    setTimeout(() => setFeedback(null), 3500)
+  }
 
   return (
     <>
@@ -139,6 +153,17 @@ export default function Lidmaatschap() {
       {/* Pricing cards */}
       <section className="py-24 md:py-32 bg-[#0a0a0a] border-y border-white/5">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
+          {feedback && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-8 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-sm flex items-center justify-center gap-2 max-w-xl mx-auto"
+            >
+              <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+              <span className="font-semibold">{feedback}</span>
+            </motion.div>
+          )}
+
           {/* Periode-kiezer */}
           <div className="flex justify-center mb-14">
             <div className="inline-flex rounded-full bg-[#111111] border border-white/10 p-1.5 gap-1">
@@ -213,16 +238,37 @@ export default function Lidmaatschap() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  to="/contact"
-                  className={`block w-full py-3.5 text-center rounded-xl font-semibold transition-all text-sm ${
-                    tier.highlight
-                      ? 'bg-[#D4AF37] text-[#050505] hover:bg-[#F4D068] glow-gold'
-                      : 'bg-[#1a1a1a] text-white border border-[#D4AF37]/20 hover:bg-[#D4AF37] hover:text-[#050505]'
-                  }`}
-                >
-                  {tier.cta}
-                </Link>
+                {user ? (
+                  user.tier === tier.key ? (
+                    <div className="w-full py-3.5 px-4 text-center rounded-xl font-bold text-xs sm:text-sm bg-[#D4AF37]/20 border border-[#D4AF37] text-[#D4AF37] flex items-center justify-center gap-2">
+                      <CheckCircle2 className="w-4 h-4" />
+                      <span>Huidige Tier (Actief)</span>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => handleSelectTier(tier.key)}
+                      className={`w-full py-3.5 px-4 text-center rounded-xl font-bold transition-all text-xs sm:text-sm ${
+                        tier.highlight
+                          ? 'bg-[#D4AF37] text-[#050505] hover:bg-[#F4D068] glow-gold'
+                          : 'bg-[#1a1a1a] text-white border border-[#D4AF37]/30 hover:bg-[#D4AF37] hover:text-[#050505]'
+                      }`}
+                    >
+                      Kies {tier.name} (Direct Activeren)
+                    </button>
+                  )
+                ) : (
+                  <Link
+                    to="/login"
+                    className={`block w-full py-3.5 text-center rounded-xl font-semibold transition-all text-sm ${
+                      tier.highlight
+                        ? 'bg-[#D4AF37] text-[#050505] hover:bg-[#F4D068] glow-gold'
+                        : 'bg-[#1a1a1a] text-white border border-[#D4AF37]/20 hover:bg-[#D4AF37] hover:text-[#050505]'
+                    }`}
+                  >
+                    {tier.cta}
+                  </Link>
+                )}
               </motion.div>
             ))}
           </div>

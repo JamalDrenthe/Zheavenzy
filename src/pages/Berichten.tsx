@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Navigate, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Send, MessageSquare, Paperclip, Smile, Mic, CheckCheck, Search } from 'lucide-react'
+import { Send, MessageSquare, Paperclip, Smile, Mic, CheckCheck, Search, ArrowLeft } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import { usePlatform } from '../lib/usePlatform'
 import { members, roleLabel } from '../lib/data'
@@ -71,12 +71,12 @@ export default function Berichten() {
 
       <section className="py-16 bg-[#0a0a0a] border-y border-white/5 min-h-[55vh]">
         <div className="max-w-6xl mx-auto px-6 md:px-12">
-          {/* WhatsApp-achtige chat: lichte kaart op donkere pagina */}
+          {/* WhatsApp-achtige chat: lichte kaart op donkere pagina met responsive mobile switch */}
           <div className="rounded-2xl overflow-hidden shadow-[0_2rem_4rem_-2rem_rgba(0,0,0,0.7)] grid md:grid-cols-[320px_1fr] min-h-[560px] bg-white">
-            {/* Contacten */}
-            <div className="border-r border-[#e5e5e5] bg-white flex flex-col">
+            {/* Contactenlijst: verborgen op mobile als chat actief is */}
+            <div className={`border-r border-[#e5e5e5] bg-white flex flex-col ${active ? 'hidden md:flex' : 'flex'}`}>
               <div className="px-5 py-4 border-b border-[#e5e5e5] flex items-center justify-between">
-                <span className="text-[#333] font-bold text-sm">Chats</span>
+                <span className="text-[#333] font-bold text-sm">Gesprekken</span>
                 <Search className="w-4 h-4 text-[#999]" />
               </div>
               <div className="flex-1 overflow-y-auto">
@@ -127,19 +127,27 @@ export default function Berichten() {
               </div>
             </div>
 
-            {/* Chat */}
-            <div className="flex flex-col bg-[#efeae2]">
+            {/* Chatview: verborgen op mobile als geen chat gekozen is */}
+            <div className={`flex flex-col bg-[#efeae2] ${!active ? 'hidden md:flex' : 'flex'}`}>
               {activeMember ? (
                 <>
-                  {/* Chat-header */}
-                  <div className="px-5 py-3 bg-white border-b border-[#e5e5e5] flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#8a6d1d] text-xs font-bold">
+                  {/* Chat-header met Terug-knop op mobile */}
+                  <div className="px-4 sm:px-5 py-3 bg-white border-b border-[#e5e5e5] flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setActive(null)}
+                      className="md:hidden p-1.5 -ml-1 text-[#666] hover:text-black rounded-lg transition-colors"
+                      title="Terug naar chats"
+                    >
+                      <ArrowLeft className="w-5 h-5" />
+                    </button>
+                    <div className="w-10 h-10 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#8a6d1d] text-xs font-bold shrink-0">
                       {initials(activeMember.name)}
                     </div>
-                    <div>
-                      <div className="text-[#333] font-bold text-sm">{activeMember.name}</div>
-                      <div className="text-[#999] text-[11px]">
-                        {typing ? 'aan het typen...' : `${roleLabel(activeMember.role)} · online`}
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[#333] font-bold text-sm truncate">{activeMember.name}</div>
+                      <div className="text-[#999] text-[11px] truncate">
+                        {typing ? 'aan het typen...' : `${roleLabel(activeMember.role)} · online (Firestore)`}
                       </div>
                     </div>
                   </div>
