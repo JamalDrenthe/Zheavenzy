@@ -25,6 +25,7 @@ import {
   subscribeUserUploads,
   type FirestoreUserData,
 } from './firebase'
+import { syncMemberToCRMos, syncBookingToCRMos } from './crmos'
 import type { Unsubscribe } from 'firebase/firestore'
 
 const STORAGE_KEY = 'zheavenzy-platform-v2'
@@ -171,6 +172,14 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
             }
 
             await saveUserToFirestore(uid, newUserDoc)
+            syncMemberToCRMos({
+              name: newUserDoc.name,
+              email: newUserDoc.email,
+              role: newUserDoc.role,
+              tier: newUserDoc.tier,
+              credits: initialCredits,
+              bio: newUserDoc.bio,
+            })
 
             setState((s) => ({
               ...s,
@@ -350,6 +359,15 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
           credits,
         })
 
+        syncMemberToCRMos({
+          name: updatedUser.name,
+          email: updatedUser.email,
+          role: updatedUser.role,
+          tier: updatedUser.tier,
+          credits,
+          bio: updatedUser.bio,
+        })
+
         setState((s) => ({
           ...s,
           user: updatedUser,
@@ -406,6 +424,15 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         }
 
         await saveUserToFirestore(uid, { ...newUser, credits })
+
+        syncMemberToCRMos({
+          name: newUser.name,
+          email: newUser.email,
+          role: newUser.role,
+          tier: newUser.tier,
+          credits,
+          bio: newUser.bio,
+        })
 
         setState((s) => ({
           ...s,
@@ -599,6 +626,13 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
       if (state.user?.uid && !state.user.isDemo) {
         saveBookingToFirestore(state.user.uid, newBooking)
         saveMessageToFirestore(state.user.uid, memberId, newMsg)
+        syncBookingToCRMos({
+          userName: state.user.name,
+          userEmail: state.user.email,
+          memberName: member?.name ?? memberId,
+          date,
+          status,
+        })
       }
     },
 
@@ -694,6 +728,14 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
           services: updatedUser.services,
           costPerDay: updatedUser.costPerDay,
           directBook: updatedUser.directBook,
+        })
+        syncMemberToCRMos({
+          name: updatedUser.name,
+          email: updatedUser.email,
+          role: updatedUser.role,
+          tier: updatedUser.tier,
+          credits: state.credits,
+          bio: updatedUser.bio,
         })
       }
     },

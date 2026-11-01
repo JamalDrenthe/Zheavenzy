@@ -13,6 +13,7 @@ import {
   Youtube,
   Music
 } from 'lucide-react'
+import { syncLeadFromContactForm } from '../lib/crmos'
 
 export default function Contact() {
   useScrollReveal()
@@ -27,6 +28,8 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitted(true)
+    // Synchroniseer lead direct met CRMos REST API in de achtergrond
+    syncLeadFromContactForm(formData)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

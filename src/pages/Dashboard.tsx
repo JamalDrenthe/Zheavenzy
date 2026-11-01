@@ -259,7 +259,7 @@ export default function Dashboard() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                   <div className="p-3 rounded-xl bg-white/5 border border-white/10">
                     <div className="flex items-center gap-1.5 text-white/50 text-[10px] uppercase font-mono">
                       <Server className="w-3 h-3 text-emerald-400" /> Vercel Live
@@ -272,11 +272,17 @@ export default function Dashboard() {
                     </div>
                     <div className="text-white font-semibold mt-1">{firebaseConfig.projectId}</div>
                   </div>
-                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 col-span-2 sm:col-span-1">
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+                    <div className="flex items-center gap-1.5 text-white/50 text-[10px] uppercase font-mono">
+                      <Database className="w-3 h-3 text-[#D4AF37]" /> CRMos API
+                    </div>
+                    <div className="text-white font-semibold mt-1">crmos.one/api/v1</div>
+                  </div>
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10">
                     <div className="flex items-center gap-1.5 text-white/50 text-[10px] uppercase font-mono">
                       <GitBranch className="w-3 h-3 text-blue-400" /> Git Status
                     </div>
-                    <div className="text-white font-semibold mt-1">main (Gesynchroniseerd)</div>
+                    <div className="text-white font-semibold mt-1">main (Synced)</div>
                   </div>
                 </div>
               </div>
