@@ -6,7 +6,6 @@ import {
   Heart,
   Share2,
   ListMusic,
-  Download,
   Clock,
   ArrowLeft,
   MessageSquare,
@@ -24,8 +23,6 @@ import { getArtistById } from '@/data/audioCatalog';
 import { Waveform } from '@/components/Waveform';
 import { TrackCover } from '@/components/TrackCover';
 import { ShareTrackModal } from '@/components/ShareTrackModal';
-import { getLocalAudioUrl } from '@/lib/audioStorage';
-import { generateTrackAudio } from '@/lib/audioSynthesizer';
 import { toast } from 'sonner';
 
 interface TrackComment {
@@ -74,23 +71,6 @@ export default function TrackDetail() {
   const isCurrent = currentTrack?.id === track.id;
   const isCurrentPlaying = isCurrent && isPlaying;
   const artist = getArtistById(track.userId);
-
-  const handleDownload = async () => {
-    try {
-      const localUrl = await getLocalAudioUrl(track.id);
-      let downloadUrl = localUrl || track.audioUrl;
-      if (!downloadUrl) {
-        downloadUrl = await generateTrackAudio(track);
-      }
-      const link = document.createElement('a');
-      link.href = downloadUrl;
-      link.download = `${track.title}.wav`;
-      link.click();
-      toast.success(`Download gestart voor ${track.title}`);
-    } catch {
-      toast.error('Download mislukt');
-    }
-  };
 
   const handleAddComment = (e: React.FormEvent) => {
     e.preventDefault();
@@ -223,15 +203,6 @@ export default function TrackDetail() {
                 >
                   <Share2 className="w-4 h-4 mr-2" />
                   <span>Delen</span>
-                </Button>
-
-                <Button
-                  variant="outline"
-                  onClick={handleDownload}
-                  className="border-white/15 bg-white/5 hover:bg-white/10 text-white rounded-xl"
-                >
-                  <Download className="w-4 h-4 mr-2 text-[#D4AF37]" />
-                  <span>Download Master</span>
                 </Button>
               </div>
             </div>

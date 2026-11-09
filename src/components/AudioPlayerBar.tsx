@@ -11,7 +11,6 @@ import {
   Shuffle,
   ListMusic,
   Heart,
-  Download,
   Activity,
   X,
 } from 'lucide-react';
@@ -29,10 +28,7 @@ import { useTracks } from '@/context/TrackContext';
 import { Link } from 'react-router-dom';
 import { Waveform } from '@/components/Waveform';
 import { TrackCover } from '@/components/TrackCover';
-import { getLocalAudioUrl } from '@/lib/audioStorage';
-import { generateTrackAudio } from '@/lib/audioSynthesizer';
 import { getArtistById } from '@/data/audioCatalog';
-import { toast } from 'sonner';
 
 function formatTime(seconds: number): string {
   if (isNaN(seconds) || seconds < 0) return '0:00';
@@ -84,23 +80,6 @@ export function AudioPlayerBar() {
   if (!currentTrack) return null;
 
   const artist = getArtistById(currentTrack.userId);
-
-  const handleDownload = async () => {
-    try {
-      const localUrl = await getLocalAudioUrl(currentTrack.id);
-      let downloadUrl = localUrl || currentTrack.audioUrl;
-      if (!downloadUrl) {
-        downloadUrl = await generateTrackAudio(currentTrack);
-      }
-      const link = document.createElement('a');
-      link.href = downloadUrl;
-      link.download = `${currentTrack.title}.wav`;
-      link.click();
-      toast.success(`Download gestart voor ${currentTrack.title}`);
-    } catch {
-      toast.error('Download kon niet worden voltooid');
-    }
-  };
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#0a0a0c]/95 backdrop-blur-2xl backdrop-saturate-150 border-t border-white/10 shadow-[0_-12px_40px_rgba(0,0,0,0.85)]">
@@ -308,17 +287,6 @@ export function AudioPlayerBar() {
                 onValueChange={(val) => setVolume(val[0] / 100)}
               />
             </div>
-
-            {/* Download */}
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              className="h-8 w-8 rounded-full text-white/60 hover:text-white hidden sm:flex"
-              onClick={handleDownload}
-              title="Download master audio"
-            >
-              <Download className="w-3.5 h-3.5" />
-            </Button>
 
             {/* Queue Flyout */}
             <Sheet>
