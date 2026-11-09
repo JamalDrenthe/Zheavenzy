@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Zheavenzy",
+    "slug": "zheavenzy",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "zheavenzy",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#050505",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "one.zheavenzy.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Zheavenzy gebruikt de camera voor profiel- en artworkfoto's.",
+        "NSMicrophoneUsageDescription": "Zheavenzy gebruikt de microfoon voor audio-opnames in de studio."
+      }
+    },
+    "android": {
+      "package": "one.zheavenzy.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#050505",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-status-bar"
+    ]
+  }
+}

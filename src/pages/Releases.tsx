@@ -9,8 +9,14 @@ import {
   FileAudio,
   Calendar,
   Radio,
+  Play,
+  Pause,
 } from 'lucide-react'
 import PageHero, { CtaSection, SectionIntro } from '../components/PageHero'
+import { usePlayer } from '@/context/PlayerContext'
+import { useTracks } from '@/context/TrackContext'
+import { TrackCover } from '@/components/TrackCover'
+import { Button } from '@/components/ui/button'
 
 const platforms = [
   'Spotify', 'Apple Music', 'YouTube Music', 'TikTok', 'Instagram',
@@ -61,6 +67,8 @@ const voordelen = [
 
 export default function Releases() {
   useScrollReveal()
+  const { currentTrack, isPlaying, playTrack, togglePlay } = usePlayer()
+  const { tracks } = useTracks()
 
   return (
     <>
@@ -73,6 +81,80 @@ export default function Releases() {
         }
         description="Onder Zheavenzy breng je je muziek uit op alle streaming platforms zonder label en zonder contract. Alleen een lidmaatschap."
       />
+
+      {/* Recente Releases Player Showcase */}
+      <section className="py-16 bg-[#070709] border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <div>
+              <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-semibold mb-1">
+                Live Catalogus
+              </p>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+                Recente Zheavenzy Releases
+              </h2>
+            </div>
+            <Link to="/app">
+              <Button className="bg-[#D4AF37] text-black hover:bg-[#F3E5AB] font-semibold rounded-xl text-xs">
+                Open Volledige Music App
+              </Button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {tracks.slice(0, 6).map((track) => {
+              const isCurrent = currentTrack?.id === track.id
+              const isCurrentPlaying = isCurrent && isPlaying
+
+              return (
+                <div
+                  key={track.id}
+                  className={`p-4 rounded-2xl border flex items-center justify-between gap-3 transition-all ${
+                    isCurrent
+                      ? 'bg-[#D4AF37]/10 border-[#D4AF37]/40 shadow-lg'
+                      : 'bg-white/[0.03] border-white/5 hover:bg-white/[0.07]'
+                  }`}
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0 ring-1 ring-white/10 bg-black/40">
+                      <TrackCover track={track} />
+                    </div>
+                    <div className="min-w-0">
+                      <p className={`text-sm font-semibold truncate ${isCurrent ? 'text-[#D4AF37]' : 'text-white'}`}>
+                        {track.title}
+                      </p>
+                      <p className="text-xs text-white/50 truncate">
+                        {track.userName || 'Zheavenzy'} • {track.genre}
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      if (isCurrentPlaying) {
+                        togglePlay()
+                      } else {
+                        playTrack(track)
+                      }
+                    }}
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all ${
+                      isCurrentPlaying
+                        ? 'bg-[#D4AF37] text-black shadow-md scale-105'
+                        : 'bg-white/10 text-white hover:bg-[#D4AF37] hover:text-black'
+                    }`}
+                  >
+                    {isCurrentPlaying ? (
+                      <Pause className="w-4 h-4 fill-current" />
+                    ) : (
+                      <Play className="w-4 h-4 fill-current ml-0.5" />
+                    )}
+                  </button>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* Platforms */}
       <section className="py-24 bg-[#0a0a0a] border-y border-white/5">

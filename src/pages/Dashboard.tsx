@@ -161,6 +161,22 @@ export default function Dashboard() {
             </div>
 
             <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+              <Link
+                to="/app"
+                className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] hover:opacity-95 text-black text-xs font-bold transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(212,175,55,0.25)]"
+              >
+                <Music2 className="w-3.5 h-3.5" />
+                <span>Music App</span>
+              </Link>
+
+              <Link
+                to="/app/upload"
+                className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs border border-white/10 transition-colors flex items-center gap-1.5"
+              >
+                <UploadCloud className="w-3.5 h-3.5 text-[#D4AF37]" />
+                <span>Upload Track</span>
+              </Link>
+
               <button
                 type="button"
                 onClick={() => syncWithFirestore()}

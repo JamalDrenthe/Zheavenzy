@@ -2,6 +2,8 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import { AudioPlayerBar } from './AudioPlayerBar'
+import { AddToPlaylistModal } from './AddToPlaylistModal'
 
 export default function Layout() {
   const location = useLocation()
@@ -17,6 +19,8 @@ export default function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <AudioPlayerBar />
+      <AddToPlaylistModal />
     </div>
   )
 }

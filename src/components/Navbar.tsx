@@ -12,6 +12,7 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
+  { label: 'Muziek App', href: '/app' },
   {
     label: 'Diensten',
     children: [
@@ -25,6 +26,8 @@ const navItems: NavItem[] = [
   {
     label: 'Platform',
     children: [
+      { href: '/app', label: 'Zheavenzy Music App', desc: 'Beluister live masters, stems & catalogus' },
+      { href: '/app/upload', label: 'Upload Master Track', desc: 'Publiceer je track direct op het platform' },
       { href: '/platform', label: 'Het Platform', desc: 'Lid of getekend: twee duidelijke routes' },
       { href: '/platform/releases', label: 'Muziek Uitbrengen', desc: 'Releases op alle platforms, zonder label' },
       { href: '/lidmaatschap', label: 'Lidmaatschappen', desc: 'Drie tiers, één keuze die past' },

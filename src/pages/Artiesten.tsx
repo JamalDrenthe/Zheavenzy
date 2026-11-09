@@ -13,8 +13,13 @@ import {
   Music2,
   BarChart3,
   Sparkles,
-  Globe
+  Globe,
+  Play,
 } from 'lucide-react'
+import { usePlayer } from '@/context/PlayerContext'
+import { useTracks } from '@/context/TrackContext'
+import { zheavenzyArtists } from '@/data/audioCatalog'
+import { Button } from '@/components/ui/button'
 
 const diensten = [
   {
@@ -70,6 +75,8 @@ const stats = [
 
 export default function Artiesten() {
   useScrollReveal()
+  const { playQueue } = usePlayer()
+  const { tracks } = useTracks()
 
   return (
     <>
@@ -202,6 +209,65 @@ export default function Artiesten() {
                 <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Artist Roster Showcase */}
+      <section className="py-24 bg-[#070709] border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-12">
+            <div>
+              <span className="text-[#D4AF37] font-bold tracking-[0.2em] uppercase text-xs">Roster & Geluid</span>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-1">
+                Het Zheavenzy <span className="text-gradient-gold">Collectief</span>
+              </h2>
+            </div>
+            <Link to="/app">
+              <Button className="bg-[#D4AF37] text-black hover:bg-[#F3E5AB] font-semibold rounded-xl text-xs">
+                Ontdek in Music App
+              </Button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {zheavenzyArtists.slice(0, 8).map((artist) => {
+              const artistTracks = tracks.filter((t) => t.userId === artist.id)
+              return (
+                <div
+                  key={artist.id}
+                  className="p-5 rounded-2xl bg-neutral-900/50 border border-white/10 hover:border-[#D4AF37]/50 transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <img
+                        src={artist.avatarUrl}
+                        alt={artist.displayName}
+                        className="w-12 h-12 rounded-xl object-cover ring-1 ring-white/15"
+                      />
+                      <div className="min-w-0">
+                        <p className="text-sm font-bold text-white truncate">{artist.displayName}</p>
+                        <p className="text-[11px] text-white/50 truncate">{artist.genre}</p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-white/60 line-clamp-2 leading-relaxed mb-4">
+                      {artist.bio}
+                    </p>
+                  </div>
+
+                  {artistTracks.length > 0 && (
+                    <Button
+                      size="sm"
+                      onClick={() => playQueue(artistTracks, 0)}
+                      className="w-full bg-[#D4AF37]/15 hover:bg-[#D4AF37] text-[#D4AF37] hover:text-black border border-[#D4AF37]/30 text-xs font-semibold rounded-xl"
+                    >
+                      <Play className="w-3.5 h-3.5 mr-1 fill-current" />
+                      Speel ({artistTracks.length})
+                    </Button>
+                  )}
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>

@@ -20,12 +20,23 @@ import Berichten from './pages/Berichten'
 import Credits from './pages/Credits'
 import Instellingen from './pages/Instellingen'
 import Notificaties from './pages/Notificaties'
+import MuziekApp from './pages/MuziekApp'
+import UploadTrack from './pages/UploadTrack'
+import TrackDetail from './pages/TrackDetail'
 
 function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
+        {/* Zheavenzy Music & Streaming App */}
+        <Route path="/app" element={<MuziekApp />} />
+        <Route path="/muziek" element={<Navigate to="/app" replace />} />
+        <Route path="/app/upload" element={<UploadTrack />} />
+        <Route path="/upload" element={<Navigate to="/app/upload" replace />} />
+        <Route path="/app/track/:id" element={<TrackDetail />} />
+        <Route path="/track/:id" element={<TrackDetail />} />
+
         <Route path="/diensten" element={<Diensten />} />
         <Route path="/diensten/artiesten" element={<Artiesten />} />
         <Route path="/artiesten" element={<Navigate to="/diensten/artiesten" replace />} />
