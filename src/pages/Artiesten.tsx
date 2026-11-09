@@ -240,13 +240,22 @@ export default function Artiesten() {
                 >
                   <div>
                     <div className="flex items-center gap-3 mb-3">
-                      <img
-                        src={artist.avatarUrl}
-                        alt={artist.displayName}
-                        className="w-12 h-12 rounded-xl object-cover ring-1 ring-white/15"
-                      />
-                      <div className="min-w-0">
+                      <div className="w-12 h-12 rounded-xl overflow-hidden ring-1 ring-white/15 bg-black/60 flex items-center justify-center flex-shrink-0">
+                        <img
+                          src={artist.avatarUrl}
+                          alt={artist.displayName}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1">
                         <p className="text-sm font-bold text-white truncate">{artist.displayName}</p>
+                        {artist.logoUrl && (
+                          <img
+                            src={artist.logoUrl}
+                            alt={`${artist.displayName} Logo`}
+                            className="h-3.5 w-auto object-contain my-0.5 opacity-85"
+                          />
+                        )}
                         <p className="text-[11px] text-white/50 truncate">{artist.genre}</p>
                       </div>
                     </div>

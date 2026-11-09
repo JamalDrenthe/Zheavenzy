@@ -62,8 +62,19 @@ export default function Leden() {
                 transition={{ delay: i * 0.05 }}
               >
                 <Link to={`/leden/${m.id}`} className="glass-card rounded-2xl p-6 block h-full hover:border-[#D4AF37]/30 transition-colors">
-                  <div className="w-12 h-12 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/25 flex items-center justify-center text-[#D4AF37] font-bold mb-4">
-                    {m.name.split(' ').map((n) => n[0]).join('')}
+                  <div className="flex items-center gap-3 mb-4">
+                    {m.avatarUrl ? (
+                      <div className="w-12 h-12 rounded-full overflow-hidden border border-[#D4AF37]/40 bg-black/60 flex items-center justify-center p-1 flex-shrink-0">
+                        <img src={m.avatarUrl} alt={m.name} className="w-full h-full object-contain" />
+                      </div>
+                    ) : (
+                      <div className="w-12 h-12 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/25 flex items-center justify-center text-[#D4AF37] font-bold flex-shrink-0">
+                        {m.name.split(' ').map((n) => n[0]).join('')}
+                      </div>
+                    )}
+                    {m.logoUrl && (
+                      <img src={m.logoUrl} alt="Logo" className="h-4 w-auto object-contain opacity-80" />
+                    )}
                   </div>
                   <div className="text-[#D4AF37]/70 text-[10px] font-bold uppercase tracking-[0.2em]">{roleLabel(m.role)}</div>
                   <h3 className="text-white font-bold mt-1">{m.name}</h3>

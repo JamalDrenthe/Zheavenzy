@@ -1,15 +1,20 @@
 import { useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Star, Coins, MessageSquare, CalendarCheck, CheckCircle2, ArrowLeft, UserPlus, UserCheck, UserPlus2, Users } from 'lucide-react'
+import { Star, Coins, MessageSquare, CalendarCheck, CheckCircle2, ArrowLeft, UserPlus, UserCheck, UserPlus2, Users, Play, Pause, Music2, ExternalLink } from 'lucide-react'
 import { usePlatform } from '../lib/usePlatform'
+import { usePlayer } from '@/context/PlayerContext'
+import { useTracks } from '@/context/TrackContext'
 import { members, roleLabel, dayLabel, dayISO } from '../lib/data'
+import { TrackCover } from '@/components/TrackCover'
 
 const dayOffsets = Array.from({ length: 14 }, (_, i) => i)
 
 export default function Lid() {
   const { id } = useParams()
   const { user, requestBooking, bookings, following, friends, pendingFriends, toggleFollow, requestFriend } = usePlatform()
+  const { currentTrack, isPlaying, playTrack, togglePlay } = usePlayer()
+  const { tracks } = useTracks()
   const [selected, setSelected] = useState<number | null>(null)
   const [done, setDone] = useState(false)
 
@@ -22,6 +27,9 @@ export default function Lid() {
   const isFriend = friends.includes(member.id)
   const isPending = pendingFriends.includes(member.id)
   const followerCount = member.followers + (isFollowing ? 1 : 0)
+
+  // Find tracks matching this member (e.g. Jamal Drenthe)
+  const memberTracks = tracks.filter((t) => t.userId === 'jamal-drenthe' || t.userName?.toLowerCase().includes(member.name.toLowerCase()))
 
   const book = () => {
     if (selected === null) return
@@ -39,13 +47,35 @@ export default function Lid() {
             <ArrowLeft className="w-3.5 h-3.5" /> Terug naar leden
           </Link>
           <div className="flex flex-wrap items-center gap-6">
-            <div className="w-20 h-20 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] font-bold text-2xl">
-              {member.name.split(' ').map((n) => n[0]).join('')}
+            <div className="w-24 h-24 rounded-2xl bg-black/60 border border-[#D4AF37]/30 flex items-center justify-center p-2 overflow-hidden flex-shrink-0 shadow-xl">
+              {member.avatarUrl ? (
+                <img src={member.avatarUrl} alt={member.name} className="w-full h-full object-contain" />
+              ) : (
+                <div className="text-[#D4AF37] font-bold text-2xl">
+                  {member.name.split(' ').map((n) => n[0]).join('')}
+                </div>
+              )}
             </div>
             <div>
               <div className="text-[#D4AF37]/70 text-[10px] font-bold uppercase tracking-[0.2em]">{roleLabel(member.role)}</div>
               <h1 className="text-4xl md:text-5xl font-extrabold tracking-tighter text-white mt-1">{member.name}</h1>
-              <p className="text-white/50 mt-1">{member.tagline}</p>
+              {member.logoUrl && (
+                <div className="mt-2 mb-1 flex items-center gap-2">
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-white/40">Official Signature:</span>
+                  <img src={member.logoUrl} alt={`${member.name} Signature Logo`} className="h-6 w-auto object-contain opacity-90 brightness-110" />
+                </div>
+              )}
+              <p className="text-white/50 mt-1 max-w-xl">{member.tagline}</p>
+              {member.website && (
+                <a
+                  href={member.website}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-xs text-[#D4AF37] hover:underline mt-2 font-medium"
+                >
+                  <ExternalLink className="w-3 h-3" /> {member.website.replace('https://', '')}
+                </a>
+              )}
             </div>
             <div className="flex flex-wrap gap-3 ml-auto">
               <button
@@ -78,7 +108,7 @@ export default function Lid() {
 
       <section className="py-16 bg-[#0a0a0a] border-y border-white/5">
         <div className="max-w-7xl mx-auto px-6 md:px-12 grid lg:grid-cols-12 gap-8">
-          {/* Profiel */}
+          {/* Profiel & Tracks */}
           <div className="lg:col-span-7 space-y-6">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card rounded-2xl p-8">
               <div className="flex flex-wrap gap-6 mb-6">
@@ -131,8 +161,103 @@ export default function Lid() {
               </div>
             </motion.div>
 
+            {/* Muziek & Discografie */}
+            {memberTracks.length > 0 && (
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }} className="glass-card rounded-2xl p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center">
+                      <Music2 className="w-5 h-5 text-[#D4AF37]" />
+                    </div>
+                    <div>
+                      <h2 className="text-white font-bold text-lg">Muziek & Discografie</h2>
+                      <p className="text-white/40 text-xs">{memberTracks.length} officiële tracks op Zheavenzy</p>
+                    </div>
+                  </div>
+                  <Link
+                    to="/app"
+                    className="text-xs font-semibold text-[#D4AF37] hover:underline flex items-center gap-1"
+                  >
+                    Open in Zheavenzy App
+                  </Link>
+                </div>
+
+                <div className="space-y-2">
+                  {memberTracks.map((trk, idx) => {
+                    const isCurrent = currentTrack?.id === trk.id
+                    const isTrkPlaying = isCurrent && isPlaying
+                    return (
+                      <div
+                        key={trk.id}
+                        className={`group flex items-center gap-3.5 p-3 rounded-xl transition-all border ${
+                          isCurrent
+                            ? 'bg-[#D4AF37]/10 border-[#D4AF37]/40 text-white'
+                            : 'bg-white/[0.02] border-white/5 hover:bg-white/[0.06] hover:border-[#D4AF37]/20 text-white/90'
+                        }`}
+                      >
+                        <button
+                          onClick={() => {
+                            if (isCurrent) {
+                              togglePlay()
+                            } else {
+                              playTrack(trk)
+                            }
+                          }}
+                          className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all flex-shrink-0 ${
+                            isTrkPlaying
+                              ? 'bg-[#D4AF37] text-black shadow-lg shadow-[#D4AF37]/30'
+                              : 'bg-white/10 group-hover:bg-[#D4AF37] group-hover:text-black text-white'
+                          }`}
+                          aria-label={isTrkPlaying ? 'Pauzeer' : 'Speel af'}
+                        >
+                          {isTrkPlaying ? (
+                            <Pause className="w-4 h-4 fill-current" />
+                          ) : (
+                            <Play className="w-4 h-4 fill-current ml-0.5" />
+                          )}
+                        </button>
+
+                        <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 border border-white/10">
+                          <TrackCover track={trk} size="sm" />
+                        </div>
+
+                        <div className="flex-1 min-w-0">
+                          <Link
+                            to={`/track/${trk.id}`}
+                            className="font-semibold text-sm hover:text-[#D4AF37] transition-colors truncate block"
+                          >
+                            {trk.title}
+                          </Link>
+                          <div className="text-white/40 text-xs flex items-center gap-2 mt-0.5">
+                            <span>#{idx + 1}</span>
+                            <span>•</span>
+                            <span>{trk.genre || 'Hip-Hop / Urban'}</span>
+                            {trk.bpm && (
+                              <>
+                                <span>•</span>
+                                <span>{trk.bpm} BPM</span>
+                              </>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="text-right text-xs text-white/40 flex flex-col items-end flex-shrink-0">
+                          <span className="font-mono text-white/70">
+                            {trk.durationFormatted || `${Math.floor(trk.duration / 60)}:${String(Math.floor(trk.duration % 60)).padStart(2, '0')}`}
+                          </span>
+                          <span className="text-[10px] text-[#D4AF37]/70">
+                            {(trk.playsCount || 0).toLocaleString('nl-NL')} streams
+                          </span>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </motion.div>
+            )}
+
             {/* Kalender */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card rounded-2xl p-8">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }} className="glass-card rounded-2xl p-8">
               <h2 className="text-white font-bold mb-1 flex items-center gap-2">
                 <CalendarCheck className="w-5 h-5 text-[#D4AF37]" />
                 Beschikbaarheid

@@ -64,6 +64,9 @@ export interface Member {
   available: number[] // dag-offsets vanaf vandaag
   followers: number
   collabs: number
+  avatarUrl?: string
+  logoUrl?: string
+  website?: string
 }
 
 export interface Message {
@@ -86,6 +89,23 @@ export interface Upload {
 }
 
 export const members: Member[] = [
+  {
+    id: 'm-jamal',
+    name: 'Jamal Drenthe',
+    role: 'artiest',
+    tagline: 'Executive Producer & Recording Artist',
+    bio: 'Executive Producer en Artiest bij Zheavenzy. Bekend om vernieuwende trap producties, diepe 808s, futuristische melodieën en authentieke hip hop anthems.',
+    services: ['Executive Productie', 'Beat Productie', 'Audio Mix & Master', 'Track Feature'],
+    stars: 5.0,
+    credits: 24500,
+    costPerDay: 1500,
+    directBook: true,
+    available: [0, 1, 2, 3, 4, 5, 6, 7],
+    followers: 18500,
+    collabs: 68,
+    avatarUrl: '/jdlogo-dark-transparent.png',
+    logoUrl: '/jdlogo-dark-transparent.png',
+  },
   {
     id: 'm-luna',
     name: 'Luna Voss',

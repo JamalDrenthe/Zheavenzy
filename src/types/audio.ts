@@ -33,6 +33,7 @@ export interface User {
   genre?: string;
   location?: string;
   website?: string;
+  logoUrl?: string;
   verified?: boolean;
   verificationStatus?: 'unverified' | 'pending' | 'verified' | 'rejected';
 }
