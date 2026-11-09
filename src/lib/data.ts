@@ -103,7 +103,7 @@ export const members: Member[] = [
     available: [0, 1, 2, 3, 4, 5, 6, 7],
     followers: 18500,
     collabs: 68,
-    avatarUrl: '/jdlogo-dark-transparent.png',
+    avatarUrl: '/jd-avatar.png',
     logoUrl: '/jdlogo-dark-transparent.png',
   },
   {

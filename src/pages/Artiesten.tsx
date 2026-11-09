@@ -248,15 +248,17 @@ export default function Artiesten() {
                         />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-bold text-white truncate">{artist.displayName}</p>
-                        {artist.logoUrl && (
-                          <img
-                            src={artist.logoUrl}
-                            alt={`${artist.displayName} Logo`}
-                            className="h-3.5 w-auto object-contain my-0.5 opacity-85"
-                          />
-                        )}
-                        <p className="text-[11px] text-white/50 truncate">{artist.genre}</p>
+                        <div className="flex items-center justify-between gap-1.5">
+                          <p className="text-sm font-bold text-white truncate">{artist.displayName}</p>
+                          {artist.logoUrl && (
+                            <img
+                              src={artist.logoUrl}
+                              alt={`${artist.displayName} Logo`}
+                              className="h-4.5 w-auto object-contain opacity-95 brightness-125"
+                            />
+                          )}
+                        </div>
+                        <p className="text-[11px] text-white/50 truncate mt-0.5">{artist.genre}</p>
                       </div>
                     </div>
                     <p className="text-xs text-white/60 line-clamp-2 leading-relaxed mb-4">

@@ -326,15 +326,17 @@ export default function TrackDetail() {
                   />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h4 className="text-base font-bold text-white truncate">{artist.displayName}</h4>
-                  {artist.logoUrl && (
-                    <img
-                      src={artist.logoUrl}
-                      alt={`${artist.displayName} Logo`}
-                      className="h-4 w-auto object-contain my-1 opacity-90"
-                    />
-                  )}
-                  <p className="text-xs text-white/50">{artist.genre}</p>
+                  <div className="flex items-center justify-between gap-2">
+                    <h4 className="text-base font-bold text-white truncate">{artist.displayName}</h4>
+                    {artist.logoUrl && (
+                      <img
+                        src={artist.logoUrl}
+                        alt={`${artist.displayName} Logo`}
+                        className="h-5 w-auto object-contain opacity-95 brightness-125"
+                      />
+                    )}
+                  </div>
+                  <p className="text-xs text-white/50 mt-0.5">{artist.genre}</p>
                   <p className="text-[11px] text-[#D4AF37] mt-0.5">
                     {artist.followersCount?.toLocaleString()} volgers
                   </p>

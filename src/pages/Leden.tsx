@@ -62,22 +62,28 @@ export default function Leden() {
                 transition={{ delay: i * 0.05 }}
               >
                 <Link to={`/leden/${m.id}`} className="glass-card rounded-2xl p-6 block h-full hover:border-[#D4AF37]/30 transition-colors">
-                  <div className="flex items-center gap-3 mb-4">
-                    {m.avatarUrl ? (
-                      <div className="w-12 h-12 rounded-full overflow-hidden border border-[#D4AF37]/40 bg-black/60 flex items-center justify-center p-1 flex-shrink-0">
-                        <img src={m.avatarUrl} alt={m.name} className="w-full h-full object-contain" />
+                  <div className="flex items-center justify-between gap-3 mb-4">
+                    <div className="flex items-center gap-3">
+                      {m.avatarUrl ? (
+                        <div className="w-12 h-12 rounded-xl overflow-hidden border border-[#D4AF37]/40 bg-black/60 flex items-center justify-center p-1 flex-shrink-0 shadow-md">
+                          <img src={m.avatarUrl} alt={m.name} className="w-full h-full object-contain" />
+                        </div>
+                      ) : (
+                        <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/25 flex items-center justify-center text-[#D4AF37] font-bold flex-shrink-0">
+                          {m.name.split(' ').map((n) => n[0]).join('')}
+                        </div>
+                      )}
+                      <div>
+                        <div className="text-[#D4AF37]/70 text-[10px] font-bold uppercase tracking-[0.2em]">{roleLabel(m.role)}</div>
+                        <h3 className="text-white font-bold">{m.name}</h3>
                       </div>
-                    ) : (
-                      <div className="w-12 h-12 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/25 flex items-center justify-center text-[#D4AF37] font-bold flex-shrink-0">
-                        {m.name.split(' ').map((n) => n[0]).join('')}
-                      </div>
-                    )}
+                    </div>
                     {m.logoUrl && (
-                      <img src={m.logoUrl} alt="Logo" className="h-4 w-auto object-contain opacity-80" />
+                      <div className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 flex items-center justify-center flex-shrink-0">
+                        <img src={m.logoUrl} alt="Logo" className="h-4.5 w-auto object-contain brightness-125" />
+                      </div>
                     )}
                   </div>
-                  <div className="text-[#D4AF37]/70 text-[10px] font-bold uppercase tracking-[0.2em]">{roleLabel(m.role)}</div>
-                  <h3 className="text-white font-bold mt-1">{m.name}</h3>
                   <p className="text-white/40 text-xs mt-1 mb-4">{m.tagline}</p>
 
                   <div className="space-y-2 text-xs">

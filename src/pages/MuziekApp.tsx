@@ -487,19 +487,19 @@ export default function MuziekApp() {
                         />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center justify-between gap-2">
                           <h3 className="text-base font-bold text-white group-hover:text-[#D4AF37] transition-colors truncate">
                             {artist.displayName}
                           </h3>
+                          {artist.logoUrl && (
+                            <img
+                              src={artist.logoUrl}
+                              alt={`${artist.displayName} Logo`}
+                              className="h-5 w-auto object-contain opacity-95 brightness-125"
+                            />
+                          )}
                         </div>
-                        {artist.logoUrl && (
-                          <img
-                            src={artist.logoUrl}
-                            alt={`${artist.displayName} Logo`}
-                            className="h-4 w-auto object-contain my-1 opacity-90"
-                          />
-                        )}
-                        <p className="text-xs text-white/50">{artist.genre}</p>
+                        <p className="text-xs text-white/50 mt-0.5">{artist.genre}</p>
                         <p className="text-[11px] text-[#D4AF37] mt-0.5">
                           {artist.followersCount?.toLocaleString()} volgers
                         </p>

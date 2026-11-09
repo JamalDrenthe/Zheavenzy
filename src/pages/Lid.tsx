@@ -60,9 +60,11 @@ export default function Lid() {
               <div className="text-[#D4AF37]/70 text-[10px] font-bold uppercase tracking-[0.2em]">{roleLabel(member.role)}</div>
               <h1 className="text-4xl md:text-5xl font-extrabold tracking-tighter text-white mt-1">{member.name}</h1>
               {member.logoUrl && (
-                <div className="mt-2 mb-1 flex items-center gap-2">
-                  <span className="text-[10px] font-bold tracking-widest uppercase text-white/40">Official Signature:</span>
-                  <img src={member.logoUrl} alt={`${member.name} Signature Logo`} className="h-6 w-auto object-contain opacity-90 brightness-110" />
+                <div className="mt-2.5 mb-1.5 flex items-center gap-2.5">
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-[#D4AF37]/80">Official Signature:</span>
+                  <div className="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center">
+                    <img src={member.logoUrl} alt={`${member.name} Signature Logo`} className="h-6 w-auto object-contain brightness-125" />
+                  </div>
                 </div>
               )}
               <p className="text-white/50 mt-1 max-w-xl">{member.tagline}</p>
