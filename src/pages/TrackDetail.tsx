@@ -126,7 +126,7 @@ export default function TrackDetail() {
 
           <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
             <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl overflow-hidden ring-1 ring-white/20 shadow-2xl flex-shrink-0 bg-black/60">
-              <TrackCover track={track} className="w-full h-full object-cover" />
+              <TrackCover track={track} className="w-full h-full" />
             </div>
 
             <div className="flex-1 min-w-0 w-full">

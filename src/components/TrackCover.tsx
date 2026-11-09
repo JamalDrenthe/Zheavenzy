@@ -16,16 +16,19 @@ export function TrackCover({ track, className = '', size = 'md' }: TrackCoverPro
   }[size];
 
   if (track.coverUrl) {
+    const isLogo = track.coverUrl.includes('logo');
     return (
-      <img
-        src={track.coverUrl}
-        alt={track.title}
-        className={`object-cover w-full h-full ${className}`}
-        loading="lazy"
-        onError={(e) => {
-          (e.target as HTMLElement).style.display = 'none';
-        }}
-      />
+      <div className="relative w-full h-full flex items-center justify-center bg-black/80 overflow-hidden">
+        <img
+          src={track.coverUrl}
+          alt={track.title}
+          className={`w-full h-full ${isLogo ? 'object-contain p-4' : 'object-cover'} ${className}`}
+          loading="lazy"
+          onError={(e) => {
+            (e.target as HTMLElement).style.display = 'none';
+          }}
+        />
+      </div>
     );
   }
 
