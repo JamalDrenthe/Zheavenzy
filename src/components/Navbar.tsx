@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, ChevronDown, LogIn, LogOut, LayoutDashboard, Bell, Crown } from 'lucide-react'
+import { Menu, X, ChevronDown, ChevronRight, LogIn, LogOut, LayoutDashboard, Bell, Crown, Radio } from 'lucide-react'
 import { usePlatform } from '../lib/usePlatform'
 import Logo from './Logo'
 
@@ -12,7 +12,6 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'Muziek App', href: '/app' },
   {
     label: 'Diensten',
     children: [
@@ -142,6 +141,20 @@ export default function Navbar() {
               </Link>
             )
           )}
+
+          {/* Dedicated App Button */}
+          <Link
+            to="/app"
+            className={`px-4 py-2 rounded-full text-xs font-bold tracking-wider uppercase flex items-center gap-2 transition-all duration-200 border ${
+              location.pathname.startsWith('/app')
+                ? 'bg-[#D4AF37] text-black border-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.4)]'
+                : 'bg-white/5 hover:bg-[#D4AF37]/15 text-[#D4AF37] border-[#D4AF37]/40 hover:border-[#D4AF37] shadow-sm'
+            }`}
+          >
+            <Radio className="w-3.5 h-3.5 animate-pulse text-current" />
+            <span>App</span>
+          </Link>
+
           <Link
             to={user ? '/dashboard' : '/login'}
             className="flex items-center gap-2 text-sm font-medium tracking-wide uppercase text-white/70 hover:text-white transition-colors"
@@ -191,21 +204,55 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile Toggle */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden text-[#D4AF37] p-2"
-          aria-label="Toggle menu"
-          aria-expanded={mobileOpen}
-        >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        {/* Mobile Actions: Direct App Button + Menu Toggle */}
+        <div className="flex items-center gap-3 lg:hidden">
+          <Link
+            to="/app"
+            className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase flex items-center gap-1.5 transition-all ${
+              location.pathname.startsWith('/app')
+                ? 'bg-[#D4AF37] text-black shadow-[0_0_15px_rgba(212,175,55,0.4)]'
+                : 'bg-[#D4AF37]/20 text-[#D4AF37] border border-[#D4AF37]/50'
+            }`}
+          >
+            <Radio className="w-3.5 h-3.5" />
+            <span>App</span>
+          </Link>
+
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="text-[#D4AF37] p-2"
+            aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Menu */}
       {mobileOpen && (
         <div className="lg:hidden bg-[#050505] border-t border-white/10 max-h-[calc(100vh-80px)] overflow-y-auto">
           <div className="flex flex-col px-8 py-6">
+            {/* Featured App Banner in Mobile Drawer */}
+            <Link
+              to="/app"
+              onClick={() => setMobileOpen(false)}
+              className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-[#D4AF37]/25 via-neutral-950 to-[#D4AF37]/10 border border-[#D4AF37]/50 flex items-center justify-between text-white shadow-lg active:scale-95 transition-all"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#D4AF37] to-[#F3E5AB] text-black flex items-center justify-center font-bold shadow-md">
+                  <Radio className="w-5 h-5 text-black" />
+                </div>
+                <div>
+                  <p className="text-sm font-extrabold text-white flex items-center gap-1.5">
+                    Zheavenzy App
+                    <span className="text-[9px] bg-[#D4AF37] text-black px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Muziek & Studio</span>
+                  </p>
+                  <p className="text-xs text-white/60 mt-0.5">Streaming speler, catalogus & releases</p>
+                </div>
+              </div>
+              <ChevronRight className="w-5 h-5 text-[#D4AF37]" />
+            </Link>
             {navItems.map((item) =>
               item.children ? (
                 <div key={item.label} className="border-b border-white/10">
